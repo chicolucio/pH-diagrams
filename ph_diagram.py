@@ -25,8 +25,11 @@ class Acid:
         log10_A = np.log10(self.alpha()[1] * self.Ca)
         return log10_HA, log10_A
 
-    def plot_params(self, axis):
-        ax = axis
+    def plot_params(self, axis=None):
+        if axis is None:
+            fig, ax = plt.subplots(nrows=1, ncols=1, tight_layout=True)
+        else:
+            ax = axis
         ax.grid(b=True, axis='both', which='major', linestyle='--', linewidth=1.5)
         ax.minorticks_on()
         ax.grid(b=True, axis='both', which='minor', linestyle=':', linewidth=1.0)
@@ -36,11 +39,13 @@ class Acid:
         ax.set_axisbelow(True)
 
     def distribution_diagram(self):
+        self.plot_params()
         plt.plot(pH, self.alpha()[0])
         plt.plot(pH, self.alpha()[1])
         plt.show()
 
     def pC_diagram(self):
+        self.plot_params()
         plt.plot(pH, -pH)
         plt.plot(pH, -pOH)
         plt.plot(pH, self.log_concentrations()[0])
@@ -50,5 +55,5 @@ class Acid:
 
 if __name__ == "__main__":
     acetic_acid = Acid(4.76, 0.1)
-    # acetic_acid.distribution_diagram()
+    acetic_acid.distribution_diagram()
     acetic_acid.pC_diagram()
