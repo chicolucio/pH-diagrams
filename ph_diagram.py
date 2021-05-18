@@ -25,6 +25,16 @@ class Acid:
         log10_A = np.log10(self.alpha()[1] * self.Ca)
         return log10_HA, log10_A
 
+    def plot_params(self, axis):
+        ax = axis
+        ax.grid(b=True, axis='both', which='major', linestyle='--', linewidth=1.5)
+        ax.minorticks_on()
+        ax.grid(b=True, axis='both', which='minor', linestyle=':', linewidth=1.0)
+        ax.tick_params(axis='both', labelsize=14, length=6, which='major', width=1.5)
+        ax.set_xlabel(r'pH', fontsize=16)
+        ax.set_ylabel(r'logc', fontsize=16)
+        ax.set_axisbelow(True)
+
     def distribution_diagram(self):
         plt.plot(pH, self.alpha()[0])
         plt.plot(pH, self.alpha()[1])
