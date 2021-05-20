@@ -30,7 +30,7 @@ class Acid:
         log10_A = np.log10(self.alpha[1] * self.Ca)
         return log10_HA, log10_A
 
-    def plot_params(self, axis=None):
+    def plot_params(self, ylabel, axis=None, xlabel='pH'):
         if axis is None:
             fig, ax = plt.subplots(nrows=1, ncols=1, tight_layout=True)
         else:
@@ -39,19 +39,27 @@ class Acid:
         ax.minorticks_on()
         ax.grid(b=True, axis='both', which='minor', linestyle=':', linewidth=1.0)
         ax.tick_params(axis='both', labelsize=14, length=6, which='major', width=1.5)
-        ax.set_xlabel(r'pH', fontsize=16)
-        # ax.set_ylabel(r'logc', fontsize=16)  # TODO consertar, não é esse label para distribuicao
+        ax.set_xlabel(xlabel, fontsize=16)
+        ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
 
     def distribution_diagram(self):
-        self.plot_params()
-        for alpha in self.alpha:
-            plt.plot(pH, alpha)
+        self.plot_params(ylabel=r'$\alpha$')
+        labels = []
+        for i in range(1, len(self.alpha) + 1):
+            idx = len(self.alpha)-i
+            charge = len(self.alpha) - (len(self.alpha) + i - 1)
+            charge = str(charge)
+            labels.append(fr'$H_{idx}A^{charge}$')
+
+        for i, alpha in enumerate(self.alpha):
+            plt.plot(pH, alpha, label=labels[i])
             # TODO labels
+        plt.legend(fontsize=16)
         plt.show()
 
     def pC_diagram(self):
-        self.plot_params()
+        self.plot_params(ylabel=r'$\log c$')
         plt.plot(pH, -pH)
         plt.plot(pH, -pOH)
         plt.plot(pH, self.log_concentrations[0])
