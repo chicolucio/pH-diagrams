@@ -50,7 +50,7 @@ class Acid:
             idx = len(self.alpha)-i
             charge = len(self.alpha) - (len(self.alpha) + i - 1)
             charge = str(charge)
-            labels.append(fr'$H_{idx}A^{charge}$')
+            labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
 
         for i, alpha in enumerate(self.alpha):
             plt.plot(pH, alpha, label=labels[i])
