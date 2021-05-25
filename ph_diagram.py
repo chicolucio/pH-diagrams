@@ -43,18 +43,27 @@ class Acid:
         ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
 
+    def formulas(self):
+        labels = []
+        number_of_species = len(self.alpha)
+        for i in range(1, number_of_species + 1):
+            idx = number_of_species - i
+            charge = number_of_species - (number_of_species + i - 1)
+            if charge == 0:
+                charge = ''
+            if idx == 0:
+                labels.append(f'$A^{{{charge}}}$')
+            if idx == 1:
+                labels.append(f'$HA^{{{charge}}}$')
+            else:
+                labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
+        return labels
+
     def distribution_diagram(self):
         self.plot_params(ylabel=r'$\alpha$')
-        labels = []
-        for i in range(1, len(self.alpha) + 1):
-            idx = len(self.alpha)-i
-            charge = len(self.alpha) - (len(self.alpha) + i - 1)
-            charge = str(charge)
-            labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
-
+        labels = self.formulas()
         for i, alpha in enumerate(self.alpha):
             plt.plot(pH, alpha, label=labels[i])
-            # TODO labels
         plt.legend(fontsize=16)
         plt.show()
 
