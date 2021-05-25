@@ -26,9 +26,7 @@ class Acid:
 
     @property
     def log_concentrations(self):
-        log10_HA = np.log10(self.alpha[0] * self.Ca)
-        log10_A = np.log10(self.alpha[1] * self.Ca)
-        return log10_HA, log10_A
+        return [np.log10(alpha * self.Ca) for alpha in self.alpha]
 
     def plot_params(self, ylabel, axis=None, xlabel='pH'):
         if axis is None:
@@ -64,28 +62,37 @@ class Acid:
         labels = self.formulas()
         for i, alpha in enumerate(self.alpha):
             plt.plot(pH, alpha, label=labels[i])
-        plt.legend(fontsize=16)
+        plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
     def pC_diagram(self):
         self.plot_params(ylabel=r'$\log c$')
-        plt.plot(pH, -pH)
-        plt.plot(pH, -pOH)
-        plt.plot(pH, self.log_concentrations[0])
-        plt.plot(pH, self.log_concentrations[1])
+        plt.plot(pH, -pH, color='black', linestyle='--', label='pH')
+        plt.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
+        labels = self.formulas()
+        for i, logc in enumerate(self.log_concentrations):
+            plt.plot(pH, logc, label=labels[i])
+        plt.ylim(-14, 0)
+        plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
 
 if __name__ == "__main__":
-    acetic_acid = Acid([4.76], 0.1)
-    acetic_acid.distribution_diagram()
+    # acetic_acid = Acid([4.76], 0.1)
+    # acetic_acid.distribution_diagram()
     # acetic_acid.pC_diagram()
-    fumaric_acid = Acid((3.02, 4.48), 0.1)  # figure 10.3 Harris
-    fumaric_acid.distribution_diagram()
 
+    # fumaric_acid = Acid((3.02, 4.48), 0.1)  # figure 10.3 Harris
+    # fumaric_acid.distribution_diagram()
+
+    # livro_figura_19 = Acid((3.0, 8.0), 0.1)
+    # livro_figura_19.pC_diagram()
+
+    livro_figura_25 = Acid((2.0, 5.0, 12.0), 0.1)
+    livro_figura_25.pC_diagram()
     # http://ion.chem.usu.edu/~sbialkow/Classes/3600/Overheads/H3A/H3A.html
-    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    tyrosine.distribution_diagram()
+    # tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
+    # tyrosine.distribution_diagram()
 
     CrIII_hydrolysis = (10**(-3.80), 10**(-6.40), 10**(-6.40), 10**(-11.40))
     CrIII_pKa = np.log10(CrIII_hydrolysis) * -1
