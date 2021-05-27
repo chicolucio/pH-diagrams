@@ -75,27 +75,3 @@ class Acid:
         plt.ylim(-14, 0)
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
-
-
-if __name__ == "__main__":
-    acetic_acid = Acid([4.76], 0.1)
-    acetic_acid.distribution_diagram()
-    acetic_acid.pC_diagram()
-
-    fumaric_acid = Acid((3.02, 4.48), 0.1)  # figure 10.3 Harris
-    fumaric_acid.distribution_diagram()
-
-    livro_figura_19 = Acid((3.0, 8.0), 0.1)
-    livro_figura_19.pC_diagram()
-
-    livro_figura_25 = Acid((2, 5, 12), 0.1)
-    livro_figura_25.pC_diagram()
-    # http://ion.chem.usu.edu/~sbialkow/Classes/3600/Overheads/H3A/H3A.html
-    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    tyrosine.distribution_diagram()
-
-    CrIII_hydrolysis = (10**(-3.80), 10**(-6.40), 10**(-6.40), 10**(-11.40))
-    CrIII_pKa = np.log10(CrIII_hydrolysis) * -1
-    CrIII = Acid(CrIII_pKa, 0.1)
-    CrIII.distribution_diagram()
-    CrIII.pC_diagram()
