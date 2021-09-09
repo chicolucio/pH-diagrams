@@ -84,7 +84,7 @@ class Acid:
                                  mode='lines',
                                  name='Nao sei ainda',
                                  opacity=0.5,
-                                 hovertemplate="%{x:.2f}, %{y:.2f}",
+                                 hovertemplate="%{x:.2f}, %{y:.2f}"
                                 ))
         fig.show()
 
@@ -95,5 +95,9 @@ class Acid:
                                  mode='lines',
                                  name='pH - log C',
                                  hovertemplate="%{x:.2f}, %{y:.2f}",
+                                ))
+        fig.add_trace(go.Scatter(x=pOH,
+                                 mode='lines',
+                                 hovertemplate="%{x:.2f}, %{y:.2f}"
                                 ))
         fig.show()
