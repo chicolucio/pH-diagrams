@@ -77,18 +77,18 @@ class Acid:
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
-    def distribution_diagram(self):
+    def distribution_diagram_plotly(self):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH,
                                  y=self.alpha,
                                  mode='lines',
                                  name='Nao sei ainda',
-                                 opacity=0.5
+                                 opacity=0.5,
                                  hovertemplate="%{x:.2f}, %{y:.2f}",
                                 ))
         fig.show()
 
-    def pC_diagram(self):
+    def pC_diagram_plotly(self):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH,
                                  y=self.log_concentrations,
