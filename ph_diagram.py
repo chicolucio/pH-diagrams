@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from operator import mul
 from functools import reduce
+import plotly.graph_objects as go
 
 pH = np.arange(0, 14.1, 0.1)
 hydronium_concentration = 10**(-pH)
@@ -75,3 +76,62 @@ class Acid:
         plt.ylim(-14, 0)
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
+
+    def distribution_diagram_plotly(self):
+        fig = go.Figure()
+        labels = self.formulas()
+        for i, alpha in enumerate(self.alpha):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=alpha,
+                                     mode='lines',
+                                     line=dict(width=3),
+                                     name=labels[i],
+                                     hovertemplate="pH: %{x:.2f}, alpha: %{y:.3f}"
+                                    ))
+        fig.update_layout(
+            title='Distribution diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': r'$\alpha$'},
+            font={'size': 18},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
+        # fig.show()
+        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
+
+    def pC_diagram_plotly(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5, name='pH',
+                                 line=dict(color='white', width=1,
+                                           dash='dash')))
+        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5, name='pOH',
+                                 line=dict(color='white', width=1,
+                                           dash='dash')))
+        labels = self.formulas()
+        for i, logc in enumerate(self.log_concentrations):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=logc,
+                                     mode='lines',
+                                     name=labels[i],
+                                     hovertemplate="pH: %{x:.2f}, logC: %{y:.3f}"
+                                    ))
+        fig.update_layout(
+            title='pC Diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': 'logC'},
+            font={'size': 18},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
+        # fig.show()
+        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
+
+
+if __name__ == '__main__':
+    acetic_acid = Acid((4.76,), 0.1)
+    # acetic_acid.distribution_diagram_plotly()
+    acetic_acid.pC_diagram_plotly()
