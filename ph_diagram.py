@@ -79,25 +79,47 @@ class Acid:
 
     def distribution_diagram_plotly(self):
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=pH,
-                                 y=self.alpha,
-                                 mode='lines',
-                                 name='Nao sei ainda',
-                                 opacity=0.5,
-                                 hovertemplate="%{x:.2f}, %{y:.2f}"
-                                ))
+        labels = self.formulas()
+        for i, alpha in enumerate(self.alpha):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=alpha,
+                                     mode='lines',
+                                     line=dict(width=3),
+                                     name=labels[i],
+                                     hovertemplate="%{x:.2f}, %{y:.3f}"
+                                    ))
+        fig.update_layout(
+            title='Distribution diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': r'$\alpha$'},
+            font={'size': 18},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
         fig.show()
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=pH,
-                                 y=self.log_concentrations,
-                                 mode='lines',
-                                 name='pH - log C',
-                                 hovertemplate="%{x:.2f}, %{y:.2f}",
-                                ))
-        fig.add_trace(go.Scatter(x=pOH,
-                                 mode='lines',
-                                 hovertemplate="%{x:.2f}, %{y:.2f}"
-                                ))
+        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
+                                 line=dict(color='black', width=1,
+                                           dash='dash')))
+        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
+                                 line=dict(color='black', width=1,
+                                           dash='dash')))
+        labels = self.formulas()
+        for i, logc in enumerate(self.log_concentrations):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=logc,
+                                     mode='lines',
+                                     name=labels[i],
+                                     hovertemplate="%{x:.2f}, %{y:.3f}"
+                                    ))
         fig.show()
+
+
+if __name__ == '__main__':
+    acetic_acid = Acid((4.76,), 0.1)
+    acetic_acid.distribution_diagram_plotly()
+    # acetic_acid.pC_diagram_plotly()
