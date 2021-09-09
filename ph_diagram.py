@@ -20,7 +20,9 @@ class Acid:
     def alpha(self):
         numerators = []
         for i in range(0, self.pKa.size + 1):
-            numerators.append(reduce(mul, self.Ka[0:i], hydronium_concentration**(self.pKa.size-i)))
+            numerators.append(reduce(mul,
+                                     self.Ka[0:i],
+                                     hydronium_concentration**(self.pKa.size-i)))  # noqa: E501
         alphas = [numerator/sum(numerators) for numerator in numerators]
         return alphas
 
@@ -33,10 +35,13 @@ class Acid:
             fig, ax = plt.subplots(nrows=1, ncols=1, tight_layout=True)
         else:
             ax = axis
-        ax.grid(b=True, axis='both', which='major', linestyle='--', linewidth=1.5)
+        ax.grid(b=True, axis='both', which='major',
+                linestyle='--', linewidth=1.5)
         ax.minorticks_on()
-        ax.grid(b=True, axis='both', which='minor', linestyle=':', linewidth=1.0)
-        ax.tick_params(axis='both', labelsize=14, length=6, which='major', width=1.5)
+        ax.grid(b=True, axis='both', which='minor',
+                linestyle=':', linewidth=1.0)
+        ax.tick_params(axis='both', labelsize=14,
+                       length=6, which='major', width=1.5)
         ax.set_xlabel(xlabel, fontsize=16)
         ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
