@@ -1,6 +1,7 @@
 # this project
 .vscode/
 .idea/
+*.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

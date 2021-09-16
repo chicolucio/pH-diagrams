@@ -21,7 +21,9 @@ class Acid:
     def alpha(self):
         numerators = []
         for i in range(0, self.pKa.size + 1):
-            numerators.append(reduce(mul, self.Ka[0:i], hydronium_concentration**(self.pKa.size-i)))
+            numerators.append(reduce(mul,
+                                     self.Ka[0:i],
+                                     hydronium_concentration**(self.pKa.size-i)))  # noqa: E501
         alphas = [numerator/sum(numerators) for numerator in numerators]
         return alphas
 
@@ -34,10 +36,13 @@ class Acid:
             fig, ax = plt.subplots(nrows=1, ncols=1, tight_layout=True)
         else:
             ax = axis
-        ax.grid(b=True, axis='both', which='major', linestyle='--', linewidth=1.5)
+        ax.grid(b=True, axis='both', which='major',
+                linestyle='--', linewidth=1.5)
         ax.minorticks_on()
-        ax.grid(b=True, axis='both', which='minor', linestyle=':', linewidth=1.0)
-        ax.tick_params(axis='both', labelsize=14, length=6, which='major', width=1.5)
+        ax.grid(b=True, axis='both', which='minor',
+                linestyle=':', linewidth=1.0)
+        ax.tick_params(axis='both', labelsize=14,
+                       length=6, which='major', width=1.5)
         ax.set_xlabel(xlabel, fontsize=16)
         ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
@@ -56,6 +61,24 @@ class Acid:
                 labels.append(f'$HA^{{{charge}}}$')
             else:
                 labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
+        return labels
+
+    def formulas_html(self):
+        labels = []
+        number_of_species = len(self.alpha)
+        for i in range(1, number_of_species + 1):
+            idx = number_of_species - i
+            charge = number_of_species - (number_of_species + i - 1)
+            if charge == 0:
+                charge = ''
+            if charge == -1:
+                charge = '-'
+            if idx == 0:
+                labels.append(f'A<sup>{charge}</sup>')
+            if idx == 1:
+                labels.append(f'HA<sup>{charge}</sup>')
+            else:
+                labels.append(f'H<sub>{idx}</sub>A<sup>{charge}</sup>')
         return labels
 
     def distribution_diagram(self):
@@ -79,7 +102,7 @@ class Acid:
 
     def distribution_diagram_plotly(self):
         fig = go.Figure()
-        labels = self.formulas()
+        labels = self.formulas_html()
         for i, alpha in enumerate(self.alpha):
             fig.add_trace(go.Scatter(x=pH,
                                      y=alpha,
@@ -99,7 +122,8 @@ class Acid:
             xaxis_tickformat='.2f',
         )
         # fig.show()
-        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
+        fig.write_html('output_distribution.html',
+                       auto_open=True, include_mathjax='cdn')
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
@@ -109,7 +133,7 @@ class Acid:
         fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5, name='pOH',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
-        labels = self.formulas()
+        labels = self.formulas_html()
         for i, logc in enumerate(self.log_concentrations):
             fig.add_trace(go.Scatter(x=pH,
                                      y=logc,
@@ -128,7 +152,7 @@ class Acid:
             xaxis_tickformat='.2f',
         )
         # fig.show()
-        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
+        fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn')
 
 
 if __name__ == '__main__':
