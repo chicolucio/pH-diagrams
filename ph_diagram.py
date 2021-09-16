@@ -55,6 +55,8 @@ class Acid:
             charge = number_of_species - (number_of_species + i - 1)
             if charge == 0:
                 charge = ''
+            if charge == -1:
+                charge = '-'
             if idx == 0:
                 labels.append(f'$A^{{{charge}}}$')
             if idx == 1:
@@ -109,8 +111,8 @@ class Acid:
                                      mode='lines',
                                      line=dict(width=3),
                                      name=labels[i],
-                                     hovertemplate="pH: %{x:.2f}, alpha: %{y:.3f}"
-                                    ))
+                                     hovertemplate='pH: %{x:.2f}, &#945;: %{y:.3f}'  # noqa: E501
+                                     ))
         fig.update_layout(
             title='Distribution diagram',
             title_x=0.5,
@@ -123,14 +125,20 @@ class Acid:
         )
         # fig.show()
         fig.write_html('output_distribution.html',
-                       auto_open=True, include_mathjax='cdn')
+                       auto_open=True, include_mathjax='cdn',
+                       config={'modeBarButtonsToAdd': ['v1hovermode',
+                                                       'hovercompare',
+                                                       'toggleSpikelines']
+                               })
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5, name='pH',
+        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
+                                 name='pH',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
-        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5, name='pOH',
+        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
+                                 name='pOH',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
         labels = self.formulas_html()
@@ -139,8 +147,8 @@ class Acid:
                                      y=logc,
                                      mode='lines',
                                      name=labels[i],
-                                     hovertemplate="pH: %{x:.2f}, logC: %{y:.3f}"
-                                    ))
+                                     hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
+                                     ))
         fig.update_layout(
             title='pC Diagram',
             title_x=0.5,
@@ -151,11 +159,10 @@ class Acid:
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        # fig.show()
         fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn')
 
 
 if __name__ == '__main__':
-    acetic_acid = Acid((4.76,), 0.1)
-    # acetic_acid.distribution_diagram_plotly()
-    acetic_acid.pC_diagram_plotly()
+    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
+    tyrosine.distribution_diagram_plotly()
+    tyrosine.pC_diagram_plotly()
