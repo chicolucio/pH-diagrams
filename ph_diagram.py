@@ -63,6 +63,24 @@ class Acid:
                 labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
         return labels
 
+    def formulas_html(self):
+        labels = []
+        number_of_species = len(self.alpha)
+        for i in range(1, number_of_species + 1):
+            idx = number_of_species - i
+            charge = number_of_species - (number_of_species + i - 1)
+            if charge == 0:
+                charge = ''
+            if charge == -1:
+                charge = '-'
+            if idx == 0:
+                labels.append(f'A<sup>{charge}</sup>')
+            if idx == 1:
+                labels.append(f'HA<sup>{charge}</sup>')
+            else:
+                labels.append(f'H<sub>{idx}</sub>A<sup>{charge}</sup>')
+        return labels
+
     def distribution_diagram(self):
         self.plot_params(ylabel=r'$\alpha$')
         labels = self.formulas()
@@ -84,7 +102,7 @@ class Acid:
 
     def distribution_diagram_plotly(self):
         fig = go.Figure()
-        labels = self.formulas()
+        labels = self.formulas_html()
         for i, alpha in enumerate(self.alpha):
             fig.add_trace(go.Scatter(x=pH,
                                      y=alpha,
@@ -92,7 +110,7 @@ class Acid:
                                      line=dict(width=3),
                                      name=labels[i],
                                      hovertemplate="%{x:.2f}, %{y:.3f}"
-                                    ))
+                                     ))
         fig.update_layout(
             title='Distribution diagram',
             title_x=0.5,
@@ -103,7 +121,9 @@ class Acid:
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        fig.show()
+        # fig.show()
+        fig.write_html('output_distribution.html',
+                       auto_open=True, include_mathjax='cdn')
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
@@ -113,18 +133,19 @@ class Acid:
         fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
                                  line=dict(color='black', width=1,
                                            dash='dash')))
-        labels = self.formulas()
+        labels = self.formulas_html()
         for i, logc in enumerate(self.log_concentrations):
             fig.add_trace(go.Scatter(x=pH,
                                      y=logc,
                                      mode='lines',
                                      name=labels[i],
                                      hovertemplate="%{x:.2f}, %{y:.3f}"
-                                    ))
-        fig.show()
+                                     ))
+        # fig.show()
+        fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn')
 
 
 if __name__ == '__main__':
-    acetic_acid = Acid((4.76,), 0.1)
-    acetic_acid.distribution_diagram_plotly()
-    # acetic_acid.pC_diagram_plotly()
+    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
+    tyrosine.distribution_diagram_plotly()
+    tyrosine.pC_diagram_plotly()
