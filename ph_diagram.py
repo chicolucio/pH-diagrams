@@ -86,7 +86,7 @@ class Acid:
                                      mode='lines',
                                      line=dict(width=3),
                                      name=labels[i],
-                                     hovertemplate="%{x:.2f}, %{y:.3f}"
+                                     hovertemplate="pH: %{x:.2f}, alpha: %{y:.3f}"
                                     ))
         fig.update_layout(
             title='Distribution diagram',
@@ -103,11 +103,11 @@ class Acid:
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
-                                 line=dict(color='black', width=1,
+        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5, name='pH',
+                                 line=dict(color='white', width=1,
                                            dash='dash')))
-        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
-                                 line=dict(color='black', width=1,
+        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5, name='pOH',
+                                 line=dict(color='white', width=1,
                                            dash='dash')))
         labels = self.formulas()
         for i, logc in enumerate(self.log_concentrations):
@@ -115,13 +115,23 @@ class Acid:
                                      y=logc,
                                      mode='lines',
                                      name=labels[i],
-                                     hovertemplate="%{x:.2f}, %{y:.3f}"
+                                     hovertemplate="pH: %{x:.2f}, logC: %{y:.3f}"
                                     ))
+        fig.update_layout(
+            title='pC Diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': 'logC'},
+            font={'size': 18},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
         # fig.show()
         fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
 
 
 if __name__ == '__main__':
     acetic_acid = Acid((4.76,), 0.1)
-    acetic_acid.distribution_diagram_plotly()
-    # acetic_acid.pC_diagram_plotly()
+    # acetic_acid.distribution_diagram_plotly()
+    acetic_acid.pC_diagram_plotly()
