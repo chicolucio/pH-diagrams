@@ -98,7 +98,8 @@ class Acid:
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        fig.show()
+        # fig.show()
+        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
 
     def pC_diagram_plotly(self):
         fig = go.Figure()
@@ -116,7 +117,8 @@ class Acid:
                                      name=labels[i],
                                      hovertemplate="%{x:.2f}, %{y:.3f}"
                                     ))
-        fig.show()
+        # fig.show()
+        fig.write_html('output.html', auto_open=True, include_mathjax='cdn')
 
 
 if __name__ == '__main__':
