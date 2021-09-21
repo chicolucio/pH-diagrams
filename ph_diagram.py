@@ -118,12 +118,10 @@ class Acid:
             title_x=0.5,
             xaxis={'title': 'pH'},
             yaxis={'title': r'$\alpha$'},
-            font={'size': 18},
             template='plotly_dark',
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        # fig.show()
         fig.write_html('output_distribution.html',
                        auto_open=True, include_mathjax='cdn',
                        config={'modeBarButtonsToAdd': ['v1hovermode',
@@ -135,10 +133,12 @@ class Acid:
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
                                  name='pH',
+                                 hoverinfo='skip',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
         fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
                                  name='pOH',
+                                 hoverinfo='skip',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
         labels = self.formulas_html()
@@ -149,13 +149,11 @@ class Acid:
                                      name=labels[i],
                                      hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
                                      ))
-        fig.update_yaxes(tick0=-14, dtick=2)
         fig.update_layout(
             title='pC Diagram',
             title_x=0.5,
             xaxis={'title': 'pH'},
-            yaxis={'title': 'logC'},
-            font={'size': 18},
+            yaxis={'title': 'logC', 'range': [-14, 0]},
             template='plotly_dark',
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
@@ -165,5 +163,5 @@ class Acid:
 
 if __name__ == '__main__':
     tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    #tyrosine.distribution_diagram_plotly()
+    tyrosine.distribution_diagram_plotly()
     tyrosine.pC_diagram_plotly()
