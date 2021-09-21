@@ -149,6 +149,7 @@ class Acid:
                                      name=labels[i],
                                      hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
                                      ))
+        fig.update_yaxes(tick0=-14, dtick=2)
         fig.update_layout(
             title='pC Diagram',
             title_x=0.5,
@@ -164,5 +165,5 @@ class Acid:
 
 if __name__ == '__main__':
     tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    tyrosine.distribution_diagram_plotly()
+    #tyrosine.distribution_diagram_plotly()
     tyrosine.pC_diagram_plotly()
