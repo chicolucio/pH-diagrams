@@ -83,7 +83,7 @@ class Acid:
                 labels.append(f'H<sub>{idx}</sub>A<sup>{charge}</sup>')
         return labels
 
-    def distribution_diagram(self):
+    def _distribution_diagram_matplotlib(self):
         self.plot_params(ylabel=r'$\alpha$')
         labels = self.formulas()
         for i, alpha in enumerate(self.alpha):
@@ -91,7 +91,7 @@ class Acid:
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
-    def pC_diagram(self):
+    def _pC_diagram_matplotlib(self):
         self.plot_params(ylabel=r'$\log c$')
         plt.plot(pH, -pH, color='black', linestyle='--', label='pH')
         plt.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
@@ -102,7 +102,7 @@ class Acid:
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
-    def distribution_diagram_plotly(self):
+    def _distribution_diagram_plotly(self):
         fig = go.Figure()
         labels = self.formulas_html()
         for i, alpha in enumerate(self.alpha):
@@ -129,7 +129,7 @@ class Acid:
                                                        'toggleSpikelines']
                                })
 
-    def pC_diagram_plotly(self):
+    def _pC_diagram_plotly(self):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
                                  name='pH',
@@ -160,8 +160,24 @@ class Acid:
         )
         fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn')
 
+    def distribution_diagram(self, backend='matplotlib'):
+        if backend == 'matplotlib':
+            self._distribution_diagram_matplotlib()
+        elif backend == 'plotly':
+            self._distribution_diagram_plotly()
+        else:
+            raise ValueError('Invalid plot backend')
+
+    def pC_diagram(self, backend='matplotlib'):
+        if backend == 'matplotlib':
+            self._pC_diagram_matplotlib()
+        elif backend == 'plotly':
+            self._pC_diagram_plotly()
+        else:
+            raise ValueError('Invalid plot backend')
+
 
 if __name__ == '__main__':
     tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    tyrosine.distribution_diagram_plotly()
-    tyrosine.pC_diagram_plotly()
+    tyrosine._distribution_diagram_plotly()
+    tyrosine._pC_diagram_plotly()
