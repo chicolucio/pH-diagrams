@@ -178,6 +178,6 @@ class Acid:
 
 
 if __name__ == '__main__':
-    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)  # exercise 10.34 Harris
-    tyrosine._distribution_diagram_plotly()
-    tyrosine._pC_diagram_plotly()
+    # An example
+    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)
+    tyrosine.plot()
