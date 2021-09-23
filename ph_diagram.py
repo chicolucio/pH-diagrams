@@ -164,21 +164,17 @@ class Acid:
                                                        'toggleSpikelines']
                                })
 
-    def distribution_diagram(self, backend='matplotlib'):
-        if backend == 'matplotlib':
+    def plot(self, type='distribution', backend='matplotlib'):
+        if type == 'distribution' and backend == 'matplotlib':
             self._distribution_diagram_matplotlib()
-        elif backend == 'plotly':
+        elif type == 'distribution' and backend == 'plotly':
             self._distribution_diagram_plotly()
-        else:
-            raise ValueError('Invalid plot backend')
-
-    def pC_diagram(self, backend='matplotlib'):
-        if backend == 'matplotlib':
+        elif type == 'pC' and backend == 'matplotlib':
             self._pC_diagram_matplotlib()
-        elif backend == 'plotly':
+        elif type == 'pC' and backend == 'plotly':
             self._pC_diagram_plotly()
         else:
-            raise ValueError('Invalid plot backend')
+            raise ValueError('Invalid type and/or plot backend')
 
 
 if __name__ == '__main__':
