@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from operator import mul
 from functools import reduce
+import plotly.graph_objects as go
 
 pH = np.arange(0, 14.1, 0.1)
 hydronium_concentration = 10**(-pH)
@@ -54,6 +55,8 @@ class Acid:
             charge = number_of_species - (number_of_species + i - 1)
             if charge == 0:
                 charge = ''
+            if charge == -1:
+                charge = '-'
             if idx == 0:
                 labels.append(f'$A^{{{charge}}}$')
             if idx == 1:
@@ -62,7 +65,25 @@ class Acid:
                 labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
         return labels
 
-    def distribution_diagram(self):
+    def formulas_html(self):
+        labels = []
+        number_of_species = len(self.alpha)
+        for i in range(1, number_of_species + 1):
+            idx = number_of_species - i
+            charge = number_of_species - (number_of_species + i - 1)
+            if charge == 0:
+                charge = ''
+            if charge == -1:
+                charge = '-'
+            if idx == 0:
+                labels.append(f'A<sup>{charge}</sup>')
+            if idx == 1:
+                labels.append(f'HA<sup>{charge}</sup>')
+            else:
+                labels.append(f'H<sub>{idx}</sub>A<sup>{charge}</sup>')
+        return labels
+
+    def _distribution_diagram_matplotlib(self):
         self.plot_params(ylabel=r'$\alpha$')
         labels = self.formulas()
         for i, alpha in enumerate(self.alpha):
@@ -70,7 +91,7 @@ class Acid:
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
-    def pC_diagram(self):
+    def _pC_diagram_matplotlib(self):
         self.plot_params(ylabel=r'$\log c$')
         plt.plot(pH, -pH, color='black', linestyle='--', label='pH')
         plt.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
@@ -80,3 +101,83 @@ class Acid:
         plt.ylim(-14, 0)
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
+
+    def _distribution_diagram_plotly(self):
+        fig = go.Figure()
+        labels = self.formulas_html()
+        for i, alpha in enumerate(self.alpha):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=alpha,
+                                     mode='lines',
+                                     line=dict(width=3),
+                                     name=labels[i],
+                                     hovertemplate='pH: %{x:.2f}, &#945;: %{y:.3f}'  # noqa: E501
+                                     ))
+        fig.update_layout(
+            title='Distribution diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': r'$\alpha$'},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
+        fig.write_html('output_distribution.html',
+                       auto_open=True, include_mathjax='cdn',
+                       config={'modeBarButtonsToAdd': ['v1hovermode',
+                                                       'hovercompare',
+                                                       'toggleSpikelines']
+                               })
+
+    def _pC_diagram_plotly(self):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
+                                 name='pH',
+                                 hoverinfo='skip',
+                                 line=dict(color='white', width=1,
+                                           dash='dash')))
+        fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
+                                 name='pOH',
+                                 hoverinfo='skip',
+                                 line=dict(color='white', width=1,
+                                           dash='dash')))
+        labels = self.formulas_html()
+        for i, logc in enumerate(self.log_concentrations):
+            fig.add_trace(go.Scatter(x=pH,
+                                     y=logc,
+                                     mode='lines',
+                                     name=labels[i],
+                                     hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
+                                     ))
+        fig.update_layout(
+            title='pC Diagram',
+            title_x=0.5,
+            xaxis={'title': 'pH'},
+            yaxis={'title': 'logC', 'range': [-14, 0]},
+            template='plotly_dark',
+            yaxis_tickformat='.3f',
+            xaxis_tickformat='.2f',
+        )
+        fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn',
+                       config={'modeBarButtonsToAdd': ['v1hovermode',
+                                                       'hovercompare',
+                                                       'toggleSpikelines']
+                               })
+
+    def plot(self, type='distribution', backend='matplotlib'):
+        if type == 'distribution' and backend == 'matplotlib':
+            self._distribution_diagram_matplotlib()
+        elif type == 'distribution' and backend == 'plotly':
+            self._distribution_diagram_plotly()
+        elif type == 'pC' and backend == 'matplotlib':
+            self._pC_diagram_matplotlib()
+        elif type == 'pC' and backend == 'plotly':
+            self._pC_diagram_plotly()
+        else:
+            raise ValueError('Invalid type and/or plot backend')
+
+
+if __name__ == '__main__':
+    # An example
+    tyrosine = Acid((2.17, 9.19, 10.47), 0.1)
+    tyrosine.plot()
