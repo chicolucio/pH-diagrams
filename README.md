@@ -42,4 +42,4 @@ Tests can be run in the top-level directory with the command `pytest -v tests/`.
 
 If you use this project in a scientific publication or in classes, please consider citing as
 
-F. L. S. Bustamante & H. B. Soares, pH diagrams, 2021 - Available at: https://github.com/helenabenevenuto/pH-diagrams
+F. L. S. Bustamante & H. B. Soares & N. O. Souza, pH diagrams, 2021 - Available at: https://github.com/natashaosouza/pH-diagrams
