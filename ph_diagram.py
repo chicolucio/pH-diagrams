@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from operator import mul
 from functools import reduce
 import plotly.graph_objects as go
+from chempy import Substance
 
 pH = np.arange(0, 14.1, 0.1)
 hydronium_concentration = 10**(-pH)
@@ -47,7 +48,7 @@ class Acid:
         ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
 
-    def formulas(self):
+    def formulas(self, output):
         labels = []
         number_of_species = len(self.alpha)
         for i in range(1, number_of_species + 1):
@@ -55,39 +56,39 @@ class Acid:
             charge = number_of_species - (number_of_species + i - 1)
             if charge == 0:
                 charge = ''
-            if charge == -1:
+            elif charge == -1:
                 charge = '-'
-            if idx == 0:
-                labels.append(f'$A^{{{charge}}}$')
-            if idx == 1:
-                labels.append(f'$HA^{{{charge}}}$')
             else:
-                labels.append(f'$H_{{{idx}}}A^{{{charge}}}$')
-        return labels
+                pass
 
-    def formulas_html(self):
-        labels = []
-        number_of_species = len(self.alpha)
-        for i in range(1, number_of_species + 1):
-            idx = number_of_species - i
-            charge = number_of_species - (number_of_species + i - 1)
-            if charge == 0:
-                charge = ''
-            if charge == -1:
-                charge = '-'
             if idx == 0:
-                labels.append(f'A<sup>{charge}</sup>')
-            if idx == 1:
-                labels.append(f'HA<sup>{charge}</sup>')
+                labels.append(f'B{charge}')
+            elif idx == 1:
+                labels.append(f'HB{charge}')
             else:
-                labels.append(f'H<sub>{idx}</sub>A<sup>{charge}</sup>')
-        return labels
+                labels.append(f'H{idx}B{charge}')
+
+        if output == 'raw':
+            return [formula.replace('B', 'A') for formula in labels]
+
+        elif output == 'latex':
+            temp = [Substance.from_formula(
+                formula).latex_name for formula in labels]
+            return [formula.replace('B', 'A') for formula in temp]
+
+        elif output == 'html':
+            temp = [Substance.from_formula(
+                formula).html_name for formula in labels]
+            return [formula.replace('B', 'A') for formula in temp]
+
+        else:
+            raise ValueError
 
     def _distribution_diagram_matplotlib(self):
         self.plot_params(ylabel=r'$\alpha$')
-        labels = self.formulas()
+        labels = self.formulas(output='latex')
         for i, alpha in enumerate(self.alpha):
-            plt.plot(pH, alpha, label=labels[i])
+            plt.plot(pH, alpha, label=f'${labels[i]}$')
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
@@ -95,16 +96,16 @@ class Acid:
         self.plot_params(ylabel=r'$\log c$')
         plt.plot(pH, -pH, color='black', linestyle='--', label='pH')
         plt.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
-        labels = self.formulas()
+        labels = self.formulas(output='latex')
         for i, logc in enumerate(self.log_concentrations):
-            plt.plot(pH, logc, label=labels[i])
+            plt.plot(pH, logc, label=f'${labels[i]}$')
         plt.ylim(-14, 0)
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
     def _distribution_diagram_plotly(self):
         fig = go.Figure()
-        labels = self.formulas_html()
+        labels = self.formulas(output='html')
         for i, alpha in enumerate(self.alpha):
             fig.add_trace(go.Scatter(x=pH,
                                      y=alpha,
@@ -141,7 +142,7 @@ class Acid:
                                  hoverinfo='skip',
                                  line=dict(color='white', width=1,
                                            dash='dash')))
-        labels = self.formulas_html()
+        labels = self.formulas(output='html')
         for i, logc in enumerate(self.log_concentrations):
             fig.add_trace(go.Scatter(x=pH,
                                      y=logc,
