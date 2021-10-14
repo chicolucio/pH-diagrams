@@ -8,9 +8,16 @@ Species distribution diagrams show the degree of dissociation as a function of p
 
 # Installation and requirements
 
-This project relies mainly on [Matplotlib](https://matplotlib.org/) and [Numpy](https://numpy.org/).
+This project relies mainly on [Matplotlib](https://matplotlib.org/),
+[Plotly](https://plotly.com/), [chempy](https://github.com/bjodah/chempy) and
+[Numpy](https://numpy.org/). If you want to contribute, use
+[PyTest](https://docs.pytest.org/en/6.2.x/)
+for tests, see [Testing](#testing) below.
 
-Just clone or download this repo. This is not a package yet. 
+Just clone or download this repo. This is not a package yet. Virtual environment
+files are provided for [venv](https://docs.python.org/3/library/venv.html) and
+[conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+See [requirements.txt](requirements.txt) and [environment.yml](environment.yml).
 
 # Contributing
 
