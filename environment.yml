@@ -1,0 +1,13 @@
+name: phdiagram
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - matplotlib=3.3.4=py39h06a4308_0
+  - pytest=6.2.3=py39h06a4308_2
+  - python=3.9.2=hdb3f193_0
+  - pip:
+    - chempy==0.8.1
+    - numpy==1.20.2
+    - plotly==5.3.1
+prefix: /opt/anaconda/envs/chemistry
