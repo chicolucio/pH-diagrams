@@ -103,7 +103,7 @@ class Acid:
         plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
         plt.show()
 
-    def _distribution_diagram_plotly(self):
+    def _distribution_diagram_plotly(self, output=False):
         fig = go.Figure()
         labels = self.formulas(output='html')
         for i, alpha in enumerate(self.alpha):
@@ -123,14 +123,17 @@ class Acid:
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        fig.write_html('output_distribution.html',
-                       auto_open=True, include_mathjax='cdn',
-                       config={'modeBarButtonsToAdd': ['v1hovermode',
-                                                       'hovercompare',
-                                                       'toggleSpikelines']
-                               })
+        if output:
+            fig.write_html('output_distribution.html',
+                           auto_open=True, include_mathjax='cdn',
+                           config={'modeBarButtonsToAdd': ['v1hovermode',
+                                                           'hovercompare',
+                                                           'toggleSpikelines']
+                                   })
+        else:
+            fig.show()
 
-    def _pC_diagram_plotly(self):
+    def _pC_diagram_plotly(self, output=False):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
                                  name='pH',
@@ -159,21 +162,27 @@ class Acid:
             yaxis_tickformat='.3f',
             xaxis_tickformat='.2f',
         )
-        fig.write_html('output_pC.html', auto_open=True, include_mathjax='cdn',
-                       config={'modeBarButtonsToAdd': ['v1hovermode',
-                                                       'hovercompare',
-                                                       'toggleSpikelines']
-                               })
 
-    def plot(self, type='distribution', backend='matplotlib'):
+        if output:
+            fig.write_html('output_pC.html', auto_open=True,
+                           include_mathjax='cdn',
+                           config={'modeBarButtonsToAdd': ['v1hovermode',
+                                                           'hovercompare',
+                                                           'toggleSpikelines']
+                                   })
+        else:
+            fig.show()
+
+    def plot(self, type='distribution',
+             backend='matplotlib', output_plotly=False):
         if type == 'distribution' and backend == 'matplotlib':
             self._distribution_diagram_matplotlib()
         elif type == 'distribution' and backend == 'plotly':
-            self._distribution_diagram_plotly()
+            self._distribution_diagram_plotly(output_plotly)
         elif type == 'pC' and backend == 'matplotlib':
             self._pC_diagram_matplotlib()
         elif type == 'pC' and backend == 'plotly':
-            self._pC_diagram_plotly()
+            self._pC_diagram_plotly(output_plotly)
         else:
             raise ValueError('Invalid type and/or plot backend')
 
