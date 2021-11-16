@@ -173,15 +173,15 @@ class Acid:
         else:
             fig.show()
 
-    def plot(self, type='distribution',
+    def plot(self, plot_type='distribution',
              backend='matplotlib', output_plotly=False):
-        if type == 'distribution' and backend == 'matplotlib':
+        if plot_type == 'distribution' and backend == 'matplotlib':
             self._distribution_diagram_matplotlib()
-        elif type == 'distribution' and backend == 'plotly':
+        elif plot_type == 'distribution' and backend == 'plotly':
             self._distribution_diagram_plotly(output_plotly)
-        elif type == 'pC' and backend == 'matplotlib':
+        elif plot_type == 'pC' and backend == 'matplotlib':
             self._pC_diagram_matplotlib()
-        elif type == 'pC' and backend == 'plotly':
+        elif plot_type == 'pC' and backend == 'plotly':
             self._pC_diagram_plotly(output_plotly)
         else:
             raise ValueError('Invalid type and/or plot backend')
