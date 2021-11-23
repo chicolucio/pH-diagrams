@@ -195,4 +195,13 @@ class Acid:
 if __name__ == '__main__':
     # An example
     tyrosine = Acid((2.17, 9.19, 10.47), 0.1)
-    tyrosine.plot()
+    fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(16, 8),
+                                   facecolor=(1, 1, 1))
+    tyrosine.plot(ax=ax1, legend=False)
+    tyrosine.plot(ax=ax2, plot_type='pC', legend=False)
+    handles, labels = ax2.get_legend_handles_labels()
+    fig.legend(loc='upper center', ncol=8,
+               handles=handles, labels=labels, fontsize=16,
+               bbox_to_anchor=(0.5, 1.0))
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.show()
