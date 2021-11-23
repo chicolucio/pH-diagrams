@@ -32,11 +32,7 @@ class Acid:
     def log_concentrations(self):
         return [np.log10(alpha * self.Ca) for alpha in self.alpha]
 
-    def plot_params(self, ylabel, axis=None, xlabel='pH'):
-        if axis is None:
-            fig, ax = plt.subplots(nrows=1, ncols=1, tight_layout=True)
-        else:
-            ax = axis
+    def plot_params(self, ylabel, ax=None, xlabel='pH'):
         ax.grid(b=True, axis='both', which='major',
                 linestyle='--', linewidth=1.5)
         ax.minorticks_on()
@@ -47,6 +43,7 @@ class Acid:
         ax.set_xlabel(xlabel, fontsize=16)
         ax.set_ylabel(ylabel, fontsize=16)
         ax.set_axisbelow(True)
+        return ax
 
     def formulas(self, output):
         labels = []
@@ -84,24 +81,32 @@ class Acid:
         else:
             raise ValueError
 
-    def _distribution_diagram_matplotlib(self):
-        self.plot_params(ylabel=r'$\alpha$')
+    def _distribution_diagram_matplotlib(self, ax=None, legend=True):
+        if ax is None:
+            fig, ax = plt.subplots(facecolor=(1.0, 1.0, 1.0),
+                                   constrained_layout=True)
+        self.plot_params(ax=ax, ylabel=r'$\alpha$')
         labels = self.formulas(output='latex')
         for i, alpha in enumerate(self.alpha):
-            plt.plot(pH, alpha, label=f'${labels[i]}$')
-        plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
-        plt.show()
+            ax.plot(pH, alpha, label=f'${labels[i]}$')
+        if legend:
+            ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
+        return ax
 
-    def _pC_diagram_matplotlib(self):
-        self.plot_params(ylabel=r'$\log c$')
-        plt.plot(pH, -pH, color='black', linestyle='--', label='pH')
-        plt.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
+    def _pC_diagram_matplotlib(self, ax=None, legend=True):
+        if ax is None:
+            fig, ax = plt.subplots(facecolor=(1.0, 1.0, 1.0),
+                                   constrained_layout=True)
+        self.plot_params(ax=ax, ylabel=r'$\log c$')
+        ax.plot(pH, -pH, color='black', linestyle='--', label='pH')
+        ax.plot(pH, -pOH, color='black', linestyle='--', label='pOH')
         labels = self.formulas(output='latex')
         for i, logc in enumerate(self.log_concentrations):
-            plt.plot(pH, logc, label=f'${labels[i]}$')
-        plt.ylim(-14, 0)
-        plt.legend(fontsize=16, bbox_to_anchor=(1, 1))
-        plt.show()
+            ax.plot(pH, logc, label=f'${labels[i]}$')
+        ax.set_ylim(-14, 0)
+        if legend:
+            ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
+        return ax
 
     def _distribution_diagram_plotly(self, output=False):
         fig = go.Figure()
@@ -174,13 +179,13 @@ class Acid:
             fig.show()
 
     def plot(self, plot_type='distribution',
-             backend='matplotlib', output_plotly=False):
+             backend='matplotlib', output_plotly=False, ax=None, legend=True):
         if plot_type == 'distribution' and backend == 'matplotlib':
-            self._distribution_diagram_matplotlib()
+            self._distribution_diagram_matplotlib(ax=ax, legend=legend)
         elif plot_type == 'distribution' and backend == 'plotly':
             self._distribution_diagram_plotly(output_plotly)
         elif plot_type == 'pC' and backend == 'matplotlib':
-            self._pC_diagram_matplotlib()
+            self._pC_diagram_matplotlib(ax=ax, legend=legend)
         elif plot_type == 'pC' and backend == 'plotly':
             self._pC_diagram_plotly(output_plotly)
         else:
