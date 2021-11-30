@@ -1,6 +1,6 @@
 # pH diagrams
 
-![pH diagrams](images/ph_diagrams.png)
+![animation](images/animation.gif)
 
 A simple script to plot pH diagrams. pH diagrams describes acid–base equilibria.
 pH-log c diagrams show the logarithmic dependence of concentration with pH.
