@@ -6,6 +6,15 @@ A simple script to plot pH diagrams. pH diagrams describes acid–base equilibri
 pH-log c diagrams show the logarithmic dependence of concentration with pH.
 Species distribution diagrams show the degree of dissociation as a function of pH.
 
+# Usage
+
+For basic usage see this tutorial: 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chicolucio/pH-diagrams/blob/master/tutorial.ipynb)
+
+For interactive plots see this tutorial:
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chicolucio/pH-diagrams/blob/master/tutorial_interativo.ipynb)
+
+
 # Installation and requirements
 
 This project relies mainly on [Matplotlib](https://matplotlib.org/),
