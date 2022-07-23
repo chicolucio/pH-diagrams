@@ -1,4 +1,4 @@
-from ph_diagram import valid_pka_values
+from src.helpers import valid_pka_values
 
 
 def test_three_inputs_no_pka():

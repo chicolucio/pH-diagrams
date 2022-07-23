@@ -1,4 +1,4 @@
-from ph_diagram import Acid
+from src.ph_diagram import Acid
 
 
 acetic_acid = Acid((4.76,), 0.1)

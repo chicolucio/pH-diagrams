@@ -187,45 +187,18 @@ class Acid:
             return fig
 
     def plot(self, plot_type='distribution',
-             backend='matplotlib', output_plotly=False, ax=None, legend=True):
+             backend='matplotlib', output_plotly=False,
+             ax=None, legend=True, title=''):
         if plot_type == 'distribution' and backend == 'matplotlib':
             return self._distribution_diagram_matplotlib(ax=ax, legend=legend)
         elif plot_type == 'distribution' and backend == 'plotly':
-            return self._distribution_diagram_plotly(output_plotly)
+            return self._distribution_diagram_plotly(output_plotly, title)
         elif plot_type == 'pC' and backend == 'matplotlib':
             return self._pC_diagram_matplotlib(ax=ax, legend=legend)
         elif plot_type == 'pC' and backend == 'plotly':
-            return self._pC_diagram_plotly(output_plotly)
+            return self._pC_diagram_plotly(output_plotly, title)
         else:
             raise ValueError('Invalid type and/or plot backend')
-
-
-def is_sorted(lst):
-    return all(a <= b for a, b in zip(lst, lst[1:]))
-
-
-def next_smaller(lst):
-    last_item = None
-    i = 0
-    for index, item in enumerate(lst):
-        if item == 0:
-            break
-        if last_item is None or (item >= last_item and index == i):
-            last_item = item
-            i += 1
-            yield item
-
-
-def valid_pka_values(values):
-    values = list(values)
-    result = []
-    if values[0] == 0:
-        pass
-    elif is_sorted(values):
-        result = values
-    else:
-        result = list(next_smaller(values))
-    return result
 
 
 if __name__ == '__main__':

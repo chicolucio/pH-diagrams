@@ -1,4 +1,4 @@
-from ph_diagram import Acid
+from src.ph_diagram import Acid
 import numpy as np
 
 FOLDER = 'tests/golden_files/'
