@@ -33,8 +33,11 @@ concentration = slider_grid[3].select_slider('concentration',
 input_pkas = (pka1, pka2, pka3)
 
 acid = Acid(tuple(valid_pka_values(input_pkas)), concentration)
-dist_plot = acid.plot('distribution', 'plotly')
-pC_plot = acid.plot('pC', 'plotly')
+acid_formula = acid.formulas(output='html')[0]
+dist_plot = acid.plot('distribution', 'plotly',
+                      title=''.join((TITLE_PREFIX_DISTRIBUTION, acid_formula)))
+pC_plot = acid.plot('pC', 'plotly',
+                    title=''.join((TITLE_PREFIX_pC, acid_formula)))
 
 col1, col2 = st.columns(2)
 with col1:
