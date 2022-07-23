@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from ph_diagram import Acid, valid_pka_values
+from src.ph_diagram import Acid, valid_pka_values
 
 st.set_page_config(layout='wide')
 st.title('pH diagrams')
