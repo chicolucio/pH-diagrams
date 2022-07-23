@@ -1,5 +1,5 @@
 chempy==0.8.1
-matplotlib==3.3.4
+matplotlib==3.5.2
 numpy==1.20.2
 plotly==5.3.1
 pytest==6.2.3
