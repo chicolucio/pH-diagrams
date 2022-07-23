@@ -44,3 +44,13 @@ with col1:
     st.plotly_chart(dist_plot, use_container_width=True)
 with col2:
     st.plotly_chart(pC_plot, use_container_width=True)
+
+sites = ('linkedin', 'portfolio', 'github')
+links = ('flsbustamante', 'https://franciscobustamante.com.br', 'chicolucio')
+
+columns = st.columns([1, 1, 1.2, 1, 1])
+
+with columns[2]:
+    st.info('Follow me for more interactive projects:')
+    for site, link in zip(sites, links):
+        find_me_buttons(site, link)
