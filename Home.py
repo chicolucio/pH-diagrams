@@ -1,12 +1,27 @@
 import streamlit as st
 import numpy as np
-from src.ph_diagram import Acid, valid_pka_values
+from src.ph_diagram import Acid
+from src.helpers import valid_pka_values
+from src.streamlit_functions import find_me_buttons, load_css
 
-st.set_page_config(layout='wide')
-st.title('pH diagrams')
+st.set_page_config(layout='wide',
+                   page_title='pH diagrams',
+                   page_icon=':alembic:')
+
+load_css()
+
+PAGE_TEXT_FILE = 'pages/01_Home.md'
+TITLE_PREFIX_DISTRIBUTION = 'Distribution diagram - '
+TITLE_PREFIX_pC = 'pC diagram - '
+
+with open(PAGE_TEXT_FILE) as f:
+    content = f.read()
+
+st.markdown(content)
 
 slider_grid = st.columns(4)
 
+# TODO 0 is a valid pKa value. Change behaviour to accept this value (one zero)
 pka1 = slider_grid[0].slider('pKa1', 0.0, 14.0, 0.0, 0.5)
 pka2 = slider_grid[1].slider('pKa2', 0.0, 14.0, 0.0, 0.5)
 pka3 = slider_grid[2].slider('pKa3', 0.0, 14.0, 0.0, 0.5)
