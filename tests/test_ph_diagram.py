@@ -80,12 +80,12 @@ class TestCrIII:
     CrIII_pKa = np.log10(CrIII_hydrolysis) * -1
     CrIII = Acid(CrIII_pKa, 0.1)
 
-    def test_CrIII_alphas(self):
+    def test_CrIII_alphas(self):  # noqa
         assert np.allclose(self.CrIII.alpha,
                            np.loadtxt(f'{FOLDER}CrIII_hydrolysis_alphas.csv',
                                       delimiter=',', unpack=True))
 
-    def test_CrIII_logc(self):
+    def test_CrIII_logc(self):  # noqa
         assert np.allclose(self.CrIII.log_concentrations,
                            np.loadtxt(f'{FOLDER}CrIII_hydrolysis_logc.csv',
                                       delimiter=',', unpack=True))

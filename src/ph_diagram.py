@@ -13,7 +13,7 @@ hydroxide_concentration = 10**(-pOH)
 
 
 class Acid:
-    def __init__(self, pKa, acid_concetration):
+    def __init__(self, pKa, acid_concetration):  # noqa
         self.pKa = np.array(pKa, dtype=float)
         self.Ka = 10**(-self.pKa)
         self.Ca = acid_concetration
@@ -93,7 +93,7 @@ class Acid:
             ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
         return ax
 
-    def _pC_diagram_matplotlib(self, ax=None, legend=True):
+    def _pC_diagram_matplotlib(self, ax=None, legend=True):  # noqa
         if ax is None:
             fig, ax = plt.subplots(facecolor=(1.0, 1.0, 1.0),
                                    constrained_layout=True)
@@ -142,7 +142,7 @@ class Acid:
         else:
             return fig
 
-    def _pC_diagram_plotly(self, output=False):
+    def _pC_diagram_plotly(self, output=False, title=''):  # noqa
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
                                  name='pH',
