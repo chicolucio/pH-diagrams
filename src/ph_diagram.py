@@ -108,7 +108,7 @@ class Acid:
             ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
         return ax
 
-    def _distribution_diagram_plotly(self, output=False):
+    def _distribution_diagram_plotly(self, output=False, title=''):
         fig = go.Figure()
         labels = self.formulas(output='html')
         for i, alpha in enumerate(self.alpha):
@@ -120,13 +120,15 @@ class Acid:
                                      hovertemplate='pH: %{x:.2f}, &#945;: %{y:.3f}'  # noqa: E501
                                      ))
         fig.update_layout(
-            title='Distribution diagram',
+            title=title,
             title_x=0.5,
             xaxis={'title': 'pH'},
-            yaxis={'title': r'$\alpha$'},
-            template='plotly_dark',
-            yaxis_tickformat='.3f',
-            xaxis_tickformat='.2f',
+            yaxis={'title': 'α'},
+            # template='plotly_dark',
+            yaxis_tickformat='.1f',
+            xaxis_tickformat='.1f',
+            margin=dict(autoexpand=True,
+                        t=30, b=30, l=30, r=30),
             legend=dict(orientation='h',
                         yanchor='top',
                         y=-0.2,
@@ -147,13 +149,13 @@ class Acid:
         fig.add_trace(go.Scatter(x=pH, y=-pH, mode='lines', opacity=0.5,
                                  name='pH',
                                  hoverinfo='skip',
-                                 line=dict(color='white', width=1,
+                                 line=dict(color='darkgray', width=1,
                                            dash='dash')))
         fig.add_trace(go.Scatter(x=pH, y=-pOH, mode='lines', opacity=0.5,
                                  name='pOH',
                                  hoverinfo='skip',
-                                 line=dict(color='white', width=1,
-                                           dash='dash')))
+                                 line=dict(color='darkgray', width=1,
+                                           dash='dashdot')))
         labels = self.formulas(output='html')
         for i, logc in enumerate(self.log_concentrations):
             fig.add_trace(go.Scatter(x=pH,
@@ -162,14 +164,17 @@ class Acid:
                                      name=labels[i],
                                      hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
                                      ))
+        # TODO yaxis with absolute values (label change to -logc)
         fig.update_layout(
-            title='pC Diagram',
+            title=title,
             title_x=0.5,
             xaxis={'title': 'pH'},
             yaxis={'title': 'logC', 'range': [-14, 0]},
-            template='plotly_dark',
-            yaxis_tickformat='.3f',
-            xaxis_tickformat='.2f',
+            # template='plotly_dark',
+            yaxis_tickformat='.1f',
+            xaxis_tickformat='.1f',
+            margin=dict(autoexpand=True,
+                        t=30, b=30, l=30, r=30),
             legend=dict(orientation='h',
                         yanchor='top',
                         y=-0.2,
