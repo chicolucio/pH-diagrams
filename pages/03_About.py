@@ -10,9 +10,9 @@ st.set_page_config(layout='centered',
 load_css()
 
 sites = ('linkedin', 'github', 'portfolio')
-links_francisco = ('flsbustamante', 'chicoluio',
+links_francisco = ('flsbustamante', 'chicolucio',
                    'https://franciscobustamante.com.br')
-links_helena = ('helenabenevenuto', 'helenabevenuto')
+links_helena = ('helenabenevenuto', 'helenabenevenuto')
 links_natasha = ('natashaosouza', 'natashaosouza')
 
 columns_main = st.columns(3)
