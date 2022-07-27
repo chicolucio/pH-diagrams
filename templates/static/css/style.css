@@ -1,3 +1,15 @@
+/*add padding to sliders to make it easier to touch in small screens*/
+.stSlider{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+/*the sidebar arrow should be greater in small screens*/
+button[kind="header"] .ex0cdmw0 {
+    scale: 2;
+}
+
+/*decrease the empty space above the page body*/
 css-12oz5g7.egzxvld2 {
     padding-top: 20px;
 }
