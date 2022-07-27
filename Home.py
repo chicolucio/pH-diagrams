@@ -21,16 +21,24 @@ st.markdown(content)
 
 slider_grid = st.columns(4)
 
-# TODO 0 is a valid pKa value. Change behaviour to accept this value (one zero)
-pka1 = slider_grid[0].slider('pKa1', 0.0, 14.0, 0.0, 0.5)
-pka2 = slider_grid[1].slider('pKa2', 0.0, 14.0, 0.0, 0.5)
-pka3 = slider_grid[2].slider('pKa3', 0.0, 14.0, 0.0, 0.5)
-conc_options = np.logspace(-5, -1, 5)
-concentration = slider_grid[3].select_slider('concentration',
-                                             options=conc_options,
-                                             value=1E-1)
+with st.sidebar:
+    option = st.selectbox('How many pKa values? ', tuple(range(1, 5)))
 
-input_pkas = (pka1, pka2, pka3)
+pkas = dict()
+
+with st.sidebar:
+    for i in range(1, option+1):
+        label = ''.join(('pKa', str(i)))
+        initial_value = 1.0 if i == 1 else 0.0
+        pkas[label] = st.slider(label, 0.0, 14.0, initial_value, 0.5)
+with st.sidebar:
+    conc_options = np.logspace(-5, -1, 5)
+    concentration = st.select_slider('concentration',
+                                     options=conc_options,
+                                     value=1E-1,
+                                     key='conc')
+
+input_pkas = pkas.values()
 
 acid = Acid(tuple(valid_pka_values(input_pkas)), concentration)
 acid_formula = acid.formulas(output='html')[0]
