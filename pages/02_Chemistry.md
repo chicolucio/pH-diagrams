@@ -1,8 +1,29 @@
 # Acid-base diagrams
 
 Table of contents:
-1. [Fractional composition diagrams](#fractional-composition-diagrams)
-2. [pH-logc diagrams](#ph-logc-diagrams)
+1. [How to use](#how-to-use)
+2. [Fractional composition diagrams](#fractional-composition-diagrams)
+3. [pH-logc diagrams](#ph-logc-diagrams)
+
+
+## How to use
+
+On the sidebar of the home page, select from the box how many $pK_a$'s values
+are needed. Then, move the sliders to choose the value of each $pK_a$. The aim
+of this interactive site is educational, so, to make things simple, the
+following simplifications were made:
+
+- only values between 0 and 14 are available. To be clear, it is perfectly
+  possible to have negative $pK_a$ values and values greater than 14. But,
+  for most cases this range is enough.
+- the increase step is set to 0.5 on $pK_a$ sliders, and the concentration
+  slider has logarithm scale, changing one order of magnitude each time.
+- each added $pK_a$ is expected to be greater than or equal to the previous one.
+  This is usually the case, but [some exceptions](https://en.wikipedia.org/wiki/Acid_dissociation_constant#Polyprotic_acids)
+  are known which are commonly related with major changes in structure.
+
+The source code under the hood of this website has none of the limitations above.
+The [source code can be found here](https://github.com/chicolucio/pH-diagrams).
 
 ## Fractional composition diagrams
 
