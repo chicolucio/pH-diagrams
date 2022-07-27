@@ -3,8 +3,7 @@ import streamlit.components.v1 as components
 
 TITLE_PREFIX_DISTRIBUTION = 'Distribution diagram - '
 TITLE_PREFIX_pC = 'pC diagram - '
-PLOTLY_REMOVE_FROM_MODEBAR = ['zoom', 'select', 'zoomIn', 'zoomOut',
-                              'resetScale']
+PLOTLY_REMOVE_FROM_MODEBAR = ['zoomIn', 'zoomOut', 'resetScale']
 PLOTLY_ADD_TO_MODEBAR = ['v1hovermode', 'toggleSpikelines']
 PLOTLY_DISPLAY_LOGO = False
 CONFIG_PLOTLY = {'displaylogo': PLOTLY_DISPLAY_LOGO,
