@@ -15,7 +15,7 @@ TITLE_PREFIX_pC = 'pC diagram - '
 
 acetic_acid = Acid((4.76, ), 0.1)
 fumaric_acid = Acid((3.02, 4.48), 0.1)
-tyrosine = Acid((2.17, 9.19, 10.47), 0.1)
+citric_acid = Acid((3.13, 4.76, 6.39), 0.1)
 
 content_parts = text_from_markdown(PAGE_TEXT_FILE)
 
@@ -32,9 +32,9 @@ st.plotly_chart(fumaric_acid.plot(backend='plotly',
                 use_container_width=True)
 
 st.markdown(''.join(content_parts[2]))
-st.plotly_chart(tyrosine.plot(backend='plotly',
-                              title=''.join((TITLE_PREFIX_DISTRIBUTION,
-                                            'Tyrosine'))),
+st.plotly_chart(citric_acid.plot(backend='plotly',
+                                 title=''.join((TITLE_PREFIX_DISTRIBUTION,
+                                                'Citric acid'))),
                 use_container_width=True)
 
 st.markdown(''.join(content_parts[3]))
@@ -52,8 +52,8 @@ st.plotly_chart(fumaric_acid.plot(backend='plotly',
                 use_container_width=True)
 
 st.markdown(''.join(content_parts[5]))
-st.plotly_chart(tyrosine.plot(backend='plotly',
-                              plot_type='pC',
-                              title=''.join((TITLE_PREFIX_pC,
-                                             'Tyrosine'))),
+st.plotly_chart(citric_acid.plot(backend='plotly',
+                                 plot_type='pC',
+                                 title=''.join((TITLE_PREFIX_pC,
+                                                'Citric acid'))),
                 use_container_width=True)
