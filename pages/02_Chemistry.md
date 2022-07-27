@@ -27,9 +27,9 @@ The [source code can be found here](https://github.com/chicolucio/pH-diagrams).
 
 ## Fractional composition diagrams
 
-*Fractional composition diagrams*, also known as *species distribution diagram*,
-are used to visualize the solution composition of a mono- or polyprotic acid
-as a function of pH.
+*Fractional composition diagrams*, also known as *species distribution diagram*
+or *speciation diagrams*, are used to visualize the solution composition of a
+mono- or polyprotic acid as a function of pH.
 
 The name comes from the fact that the vertical axis is the fraction of each
 form of the acid. Considering a monoprotic acid $HA$, the forms are $HA$ and
@@ -89,13 +89,12 @@ the fraction of $HA^-$ never gets very close to unity.
 
 ![fumaric acid]()
 
-As a final example, we have the diagram for tyrosine, a triprotic acid. The
-$pK_a$ values are 2.17, 9.19 and 10.47. As can be seen, the first and the second
-constant are far apart, so $H_3A$ and $H_2A^-$ have dominance regions. While
-the second and the third values are close to each other, with $HA^{2-}$ not
-getting close to unity.
+As a final example, we have the diagram for citric acid, a triprotic acid. The
+$pK_a$ values are 3.13, 4.76 and 6.40. As can be seen, the constants are not
+far apart, so only $H_3A$ and $A^{3-}$ have dominance regions with their 
+fractions getting close to unity.
 
-![tyrosine]()
+![citric acid]()
 
 ## pH-logc diagrams
 
@@ -164,8 +163,8 @@ for this acid are 3.02 and 4.48.
 Zooming in, one can see that $HA^-$ does not get to $\log C \approx -1.0$.
 Compare with the fractional composition diagram above.
 
-As a final example, we have the diagram for tyrosine, a triprotic acid, below.
-The $pK_a$ values are 2.17, 9.19 and 10.47. Again, compare with the fractional
+As a final example, we have the diagram for citric acid, a triprotic acid, below.
+The $pK_a$ values are 3.13, 4.76 and 6.40. Again, compare with the fractional
 composition diagram in the previous section.
 
-![tyrosine logc]()
+![citric acid logc]()
