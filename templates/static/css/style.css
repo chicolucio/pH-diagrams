@@ -14,32 +14,39 @@ css-12oz5g7.egzxvld2 {
     padding-top: 20px;
 }
 
+/*nice round photos for about page*/
 .etr89bj1 img {
     border-radius: 50%;
 }
 
+/*main titles should be clearer and centered*/
 h1 {
     font-weight: bold;
     text-align: center;
 }
 
+/*subheaders should be clearer and centered*/
 .css-10trblm.e16nr0p30 {
     font-weight: bold;
     text-align: center;
 }
 
+/*columns centered*/
 .e1tzin5v2 {
     text-align: center;
 }
 
+/*the LaTeX content does not need to be so huge*/
 .katex{
     font-size: 1.05em;
 }
 
+/*increase font size*/
 p {
     font-size: 19px;
 }
 
+/*hide Streamlit components*/
 MainMenu {
     visibility: hidden;
 }
