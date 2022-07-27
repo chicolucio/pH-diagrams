@@ -2,7 +2,8 @@ import streamlit as st
 import numpy as np
 from src.ph_diagram import Acid
 from src.helpers import valid_pka_values
-from src.streamlit_functions import find_me_buttons, load_css
+from src.streamlit_functions import find_me_buttons, load_css, \
+    TITLE_PREFIX_DISTRIBUTION, TITLE_PREFIX_pC, CONFIG_PLOTLY
 
 st.set_page_config(layout='wide',
                    page_title='pH diagrams',
@@ -11,8 +12,6 @@ st.set_page_config(layout='wide',
 load_css()
 
 PAGE_TEXT_FILE = 'pages/01_Home.md'
-TITLE_PREFIX_DISTRIBUTION = 'Distribution diagram - '
-TITLE_PREFIX_pC = 'pC diagram - '
 
 with open(PAGE_TEXT_FILE) as f:
     content = f.read()
@@ -49,9 +48,9 @@ pC_plot = acid.plot('pC', 'plotly',
 
 col1, col2 = st.columns(2)
 with col1:
-    st.plotly_chart(dist_plot, use_container_width=True)
+    st.plotly_chart(dist_plot, use_container_width=True, config=CONFIG_PLOTLY)
 with col2:
-    st.plotly_chart(pC_plot, use_container_width=True)
+    st.plotly_chart(pC_plot, use_container_width=True, config=CONFIG_PLOTLY)
 
 sites = ('linkedin', 'portfolio', 'github', 'github_sponsors')
 links = ('flsbustamante', 'https://franciscobustamante.com.br', 'chicolucio',

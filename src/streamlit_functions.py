@@ -1,6 +1,17 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+TITLE_PREFIX_DISTRIBUTION = 'Distribution diagram - '
+TITLE_PREFIX_pC = 'pC diagram - '
+PLOTLY_REMOVE_FROM_MODEBAR = ['zoom', 'select', 'zoomIn', 'zoomOut',
+                              'resetScale']
+PLOTLY_ADD_TO_MODEBAR = ['v1hovermode', 'toggleSpikelines']
+PLOTLY_DISPLAY_LOGO = False
+CONFIG_PLOTLY = {'displaylogo': PLOTLY_DISPLAY_LOGO,
+                 'modeBarButtonsToRemove': PLOTLY_REMOVE_FROM_MODEBAR,
+                 'modeBarButtonsToAdd': PLOTLY_ADD_TO_MODEBAR,
+                 }
+
 
 def load_css():
     """
