@@ -60,6 +60,10 @@ def find_me_buttons(site, url_or_user, width=120, margin=3):
         button_code = f'''
         <a href="https://github.com/{url_or_user}" target="_blank">
         <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
+    elif site == 'github_sponsors':
+        button_code = f'''
+        <a href="https://github.com/sponsors/{url_or_user}" target="_blank">
+        <img src="https://img.shields.io/badge/-Sponsor-EA4AAA?style=for-the-badge&logo=GitHubSponsors&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
     else:
         raise ValueError('Invalid site')
     return st.markdown(button_code, unsafe_allow_html=True)

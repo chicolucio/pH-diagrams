@@ -45,8 +45,9 @@ with col1:
 with col2:
     st.plotly_chart(pC_plot, use_container_width=True)
 
-sites = ('linkedin', 'portfolio', 'github')
-links = ('flsbustamante', 'https://franciscobustamante.com.br', 'chicolucio')
+sites = ('linkedin', 'portfolio', 'github', 'github_sponsors')
+links = ('flsbustamante', 'https://franciscobustamante.com.br', 'chicolucio',
+         'chicolucio')
 
 columns = st.columns([1, 1, 1.2, 1, 1])
 

@@ -9,9 +9,10 @@ st.set_page_config(layout='centered',
 
 load_css()
 
-sites = ('linkedin', 'github', 'portfolio')
+sites = ('linkedin', 'github', 'portfolio', 'github_sponsors')
 links_francisco = ('flsbustamante', 'chicolucio',
-                   'https://franciscobustamante.com.br')
+                   'https://franciscobustamante.com.br',
+                   'chicolucio')
 links_helena = ('helenabenevenuto', 'helenabenevenuto')
 links_natasha = ('natashaosouza', 'natashaosouza')
 
@@ -23,7 +24,7 @@ with columns_main[1]:
 st.header('Francisco Bustamante')
 st.success('A chemist working with Data Science and Python Programming')
 
-columns_extra = st.columns(3)
+columns_extra = st.columns(4)
 for column, site, link in zip(columns_extra, sites, links_francisco):
     with column:
         find_me_buttons(site, link)
