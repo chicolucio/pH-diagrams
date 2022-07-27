@@ -1,8 +1,11 @@
+from itertools import cycle
+
 import numpy as np
 import matplotlib.pyplot as plt
 from operator import mul
 from functools import reduce
 import plotly.graph_objects as go
+import plotly.express as px
 from chempy import Substance
 
 pH = np.arange(0, 14.1, 0.1)
@@ -157,10 +160,12 @@ class Acid:
                                  line=dict(color='darkgray', width=1,
                                            dash='dashdot')))
         labels = self.formulas(output='html')
+        palette = cycle(px.colors.qualitative.Plotly)
         for i, logc in enumerate(self.log_concentrations):
             fig.add_trace(go.Scatter(x=pH,
                                      y=logc,
                                      mode='lines',
+                                     line=dict(width=3, color=next(palette)),
                                      name=labels[i],
                                      hovertemplate='pH: %{x:.2f}, logC: %{y:.3f}'  # noqa: E501
                                      ))
