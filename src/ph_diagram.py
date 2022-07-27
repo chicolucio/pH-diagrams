@@ -135,7 +135,8 @@ class Acid:
             legend=dict(orientation='h',
                         yanchor='top',
                         y=-0.2,
-                        xanchor='left')
+                        xanchor='left'),
+            modebar=dict(orientation='v')
         )
         if output:
             fig.write_html('output_distribution.html',
@@ -183,7 +184,8 @@ class Acid:
             legend=dict(orientation='h',
                         yanchor='top',
                         y=-0.2,
-                        xanchor='left')
+                        xanchor='left'),
+            modebar=dict(orientation='v'),
         )
 
         if output:
