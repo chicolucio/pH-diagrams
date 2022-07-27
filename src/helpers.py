@@ -6,8 +6,6 @@ def next_smaller(lst):
     last_item = None
     i = 0
     for index, item in enumerate(lst):
-        if item == 0:
-            break
         if last_item is None or (item >= last_item and index == i):
             last_item = item
             i += 1
@@ -15,11 +13,23 @@ def next_smaller(lst):
 
 
 def valid_pka_values(values):
+    """
+    This function filters possible pKa values for the app web page.
+    It's perfectly fine negative pKa values and non-sorted values in real life
+    but is not so usual. Then, for educational purposes, it was decided to
+    create this filter.
+
+    Parameters
+    ----------
+    values : tuple
+
+    Returns
+    -------
+    list
+
+    """
     values = list(values)
-    result = []
-    if values[0] == 0:
-        pass
-    elif is_sorted(values):
+    if is_sorted(values):
         result = values
     else:
         result = list(next_smaller(values))
