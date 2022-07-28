@@ -16,13 +16,52 @@ hydroxide_concentration = 10**(-pOH)
 
 
 class Acid:
-    def __init__(self, pKa, acid_concetration):  # noqa
+    """
+    A class used to represent an acid
+
+    Attributes
+    ----------
+    pKa : np.array
+        array with each pKa of the acid
+    Ka : np.array
+        array with each Ka of the acid
+    Ca : float
+        analytical concentration of the acid
+    alpha : list
+        alpha values for each acid form
+    log_concentrations : list
+        log ci for each acid form
+
+    Methods
+    -------
+    formulas(ouput)
+        generates formulas for each acid form in raw string, LaTeX, or HTML
+    plot(plot_type, backend, output_plotly, ax, legend, title)
+        plots the distribution diagram or logc diagram using as backend
+        Matplotlib or Plotly
+    """
+
+    def __init__(self, pKa, acid_concentration):  # noqa
+        """
+        Parameters
+        ----------
+        pKa : tuple
+            the acid pKa's
+        acid_concentration : float
+            acid analytical concentration
+        """
         self.pKa = np.array(pKa, dtype=float)
         self.Ka = 10**(-self.pKa)
-        self.Ca = acid_concetration
+        self.Ca = acid_concentration
 
     @property
     def alpha(self):
+        """
+        Returns
+        -------
+        list
+            alpha values for each acid form
+        """
         numerators = []
         for i in range(0, self.pKa.size + 1):
             numerators.append(reduce(mul,
@@ -33,9 +72,28 @@ class Acid:
 
     @property
     def log_concentrations(self):
+        """
+        Returns
+        -------
+        list
+            log ci values for each acid form
+        """
         return [np.log10(alpha * self.Ca) for alpha in self.alpha]
 
     def plot_params(self, ylabel, ax=None, xlabel='pH'):
+        """
+        Matplotlib plot parameters
+
+        Parameters
+        ----------
+        ylabel : str
+        ax : Matplotlib axes
+        xlabel : str
+
+        Returns
+        -------
+        Matplotlib axes
+        """
         ax.grid(b=True, axis='both', which='major',
                 linestyle='--', linewidth=1.5)
         ax.minorticks_on()
@@ -49,6 +107,25 @@ class Acid:
         return ax
 
     def formulas(self, output):
+        """
+        Generates formulas for each acid form in raw string, LaTeX, or HTML
+
+        Parameters
+        ----------
+        output : str
+            Raw string if 'raw'; LaTeX if 'latex'; HTML if 'html'
+
+        Raises
+        ------
+        ValueError
+            If no valid output.
+
+        Returns
+        -------
+        list
+            List of strings in the chosen output type
+        """
+
         labels = []
         number_of_species = len(self.alpha)
         for i in range(1, number_of_species + 1):
@@ -82,7 +159,7 @@ class Acid:
             return [formula.replace('B', 'A') for formula in temp]
 
         else:
-            raise ValueError
+            raise ValueError('Invalid output type')
 
     def _distribution_diagram_matplotlib(self, ax=None, legend=True, title=''):
         if ax is None:
@@ -203,6 +280,37 @@ class Acid:
     def plot(self, plot_type='distribution',
              backend='matplotlib', output_plotly=False,
              ax=None, legend=True, title=''):
+        """
+        Method to select the plot type and backend
+
+        Parameters
+        ----------
+        plot_type : str, optional
+            'distribution' or 'pC' (default is distribution)
+        backend : str, optional
+            'matplotlib' or 'plotly' (default is matplotlib)
+        output_plotly : bool, optional
+            If backend is plotly, generates a html file with the chosen
+            plot type. Ignored if backend is matplotlib.
+            If false, the function returns a plotly figure (default is False).
+        ax : None, optional
+            If a Matplotlib axes object is passed, the plot will be shown in it.
+            If None, a figure with an axis will be created (default is None)
+        legend : bool, optional
+            Show legend when backend is Matplotlib (default is True)
+        title : str, optional
+            Title to be shown above the plot (default is '')
+
+        Raises
+        ------
+        ValueError
+            If invalid type or invalid backend
+
+        Returns
+        -------
+            A plotly figure or a matplotlib axis.
+
+        """
         if plot_type == 'distribution' and backend == 'matplotlib':
             return self._distribution_diagram_matplotlib(ax=ax, legend=legend,
                                                          title=title)
