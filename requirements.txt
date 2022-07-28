@@ -1,5 +1,5 @@
 chempy==0.8.1
 matplotlib==3.5.2
-numpy==1.20.2
+numpy==1.23.0
 plotly==5.3.1
 streamlit==1.11.0
