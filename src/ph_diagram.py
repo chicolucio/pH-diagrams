@@ -84,7 +84,7 @@ class Acid:
         else:
             raise ValueError
 
-    def _distribution_diagram_matplotlib(self, ax=None, legend=True):
+    def _distribution_diagram_matplotlib(self, ax=None, legend=True, title=''):
         if ax is None:
             fig, ax = plt.subplots(facecolor=(1.0, 1.0, 1.0),
                                    constrained_layout=True)
@@ -94,9 +94,10 @@ class Acid:
             ax.plot(pH, alpha, label=f'${labels[i]}$')
         if legend:
             ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
+        ax.set_title(title)
         return ax
 
-    def _pC_diagram_matplotlib(self, ax=None, legend=True):  # noqa
+    def _pC_diagram_matplotlib(self, ax=None, legend=True, title=''):  # noqa
         if ax is None:
             fig, ax = plt.subplots(facecolor=(1.0, 1.0, 1.0),
                                    constrained_layout=True)
@@ -109,6 +110,7 @@ class Acid:
         ax.set_ylim(-14, 0)
         if legend:
             ax.legend(fontsize=16, bbox_to_anchor=(1, 1))
+        ax.set_title(title)
         return ax
 
     def _distribution_diagram_plotly(self, output=False, title=''):
@@ -202,11 +204,13 @@ class Acid:
              backend='matplotlib', output_plotly=False,
              ax=None, legend=True, title=''):
         if plot_type == 'distribution' and backend == 'matplotlib':
-            return self._distribution_diagram_matplotlib(ax=ax, legend=legend)
+            return self._distribution_diagram_matplotlib(ax=ax, legend=legend,
+                                                         title=title)
         elif plot_type == 'distribution' and backend == 'plotly':
             return self._distribution_diagram_plotly(output_plotly, title)
         elif plot_type == 'pC' and backend == 'matplotlib':
-            return self._pC_diagram_matplotlib(ax=ax, legend=legend)
+            return self._pC_diagram_matplotlib(ax=ax, legend=legend,
+                                               title=title)
         elif plot_type == 'pC' and backend == 'plotly':
             return self._pC_diagram_plotly(output_plotly, title)
         else:
