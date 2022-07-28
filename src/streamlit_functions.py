@@ -136,7 +136,7 @@ def text_from_markdown(markdown_file, image_markdown='!['):
 def vertical_spacer(lines, sidebar=False):
     """
     On mobile screens the last slider is too close to the bottom.
-    This function can be use to insert empty lines and create a vertical
+    This function can be used to insert empty lines and create a vertical
     empty space.
 
     Parameters

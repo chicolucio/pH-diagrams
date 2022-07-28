@@ -18,15 +18,10 @@ with open(PAGE_TEXT_FILE) as f:
 
 st.markdown(content)
 
-slider_grid = st.columns(4)
-
-with st.sidebar:
-    option = st.selectbox('How many pKa values? ', tuple(range(1, 5)))
-
 pkas = dict()
 
 with st.sidebar:
-    for i in range(1, option+1):
+    for i in range(1, 5):
         label = ''.join(('pKa', str(i)))
         initial_value = 1.0 if i == 1 else 0.0
         pkas[label] = st.slider(label, 0.0, 14.0, initial_value, 0.5)
