@@ -3,7 +3,7 @@ import numpy as np
 from src.ph_diagram import Acid
 from src.helpers import valid_pka_values
 from src.streamlit_functions import find_me_buttons, load_css, \
-    TITLE_PREFIX_DISTRIBUTION, TITLE_PREFIX_pC, CONFIG_PLOTLY
+    TITLE_PREFIX_DISTRIBUTION, TITLE_PREFIX_pC, CONFIG_PLOTLY, vertical_spacer
 
 st.set_page_config(layout='wide',
                    page_title='pH diagrams',
@@ -62,3 +62,7 @@ with columns[2]:
     st.info('Follow me for more interactive projects:')
     for site, link in zip(sites, links):
         find_me_buttons(site, link)
+
+
+# making room for the last slider on mobile...
+vertical_spacer(10, sidebar=True)
