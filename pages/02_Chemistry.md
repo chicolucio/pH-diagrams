@@ -70,7 +70,7 @@ out. First, the monoprotic acid, acetic acid:
 
 ![acetic acid]()
 
-We can see the regions in which each form dominates. And it is easier to 
+We can see the regions in which each form dominates. And it is easier to
 understand thumb rules like *the buffer range is $pH = pKa \pm 1$*. The diagram
 shows that around 4.76, the acetic acid $pK_a$, appreciable concentrations of
 both species are present. Since buffers aim to maintain a more or less constant
@@ -94,14 +94,14 @@ the fraction of $HA^-$ never gets very close to unity.
 
 As a final example, we have the diagram for citric acid, a triprotic acid. The
 $pK_a$ values are 3.13, 4.76 and 6.40. As can be seen, the constants are not
-far apart, so only $H_3A$ and $A^{3-}$ have dominance regions with their 
+far apart, so only $H_3A$ and $A^{3-}$ have dominance regions with their
 fractions getting close to unity.
 
 ![citric acid]()
 
 ## pH-logc diagrams
 
-pH-$\log c_i$ diagrams present the interrelations between the logarithm of 
+pH-$\log c_i$ diagrams present the interrelations between the logarithm of
 all equilibrium concentrations $c$ of the species $i$ and the pH value of the
 solution.
 
@@ -137,8 +137,8 @@ $[OH^-]$ lines.
 
 The crossing point corresponds to the condition $[HA] = [A^-]$, when the pH is
 the same as the $pK_a$. For a formal concentration $C$, in this point each
-species concentration must be $\frac{C}{2}$. Mathematically, 
-$\log 0.5 \approx 0.3$, so one can see that the vertical location of the 
+species concentration must be $\frac{C}{2}$. Mathematically,
+$\log 0.5 \approx 0.3$, so one can see that the vertical location of the
 crossing point is $\approx -1.3$.
 
 Except for the special cases of extremely dilute solutions or very weak acids
@@ -148,9 +148,9 @@ will hold. This way, pH can be found as the intersection between these curves
 in the diagram. For the acetic acid diagram above, this intersection happens
 at pH $\approx 2.88$.
 
-An analogue reasoning can be used to find the pH of a solution of the 
+An analogue reasoning can be used to find the pH of a solution of the
 conjugate base in pure water. Consider a solution of sodium acetate in water.
-As long as we can neglect the contribution of hydroxide ions from the 
+As long as we can neglect the contribution of hydroxide ions from the
 autoprotolysis of the solvent, the relation $[HA] \approx [OH^-]$ will hold.
 The equivalence of these two concentrations corresponds to the intersection
 between these curves in the diagram. For the acetic acid diagram above, this
@@ -159,7 +159,7 @@ intersection happens at pH $\approx 8.88$.
 The same interpretation of the above monoprotic acid diagram can be extended
 to polyprotic acids.
 The following diagram is for fumaric acid, a diprotic acid. The $pK_a$ values
-for this acid are 3.02 and 4.48. 
+for this acid are 3.02 and 4.48.
 
 ![fumaric acid logc]()
 

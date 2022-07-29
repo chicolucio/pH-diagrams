@@ -1,15 +1,16 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-TITLE_PREFIX_DISTRIBUTION = 'Distribution diagram - '
-TITLE_PREFIX_pC = 'pC diagram - '
-PLOTLY_REMOVE_FROM_MODEBAR = ['zoomIn', 'zoomOut', 'resetScale']
-PLOTLY_ADD_TO_MODEBAR = ['v1hovermode', 'toggleSpikelines']
+TITLE_PREFIX_DISTRIBUTION = "Distribution diagram - "
+TITLE_PREFIX_pC = "pC diagram - "
+PLOTLY_REMOVE_FROM_MODEBAR = ["zoomIn", "zoomOut", "resetScale"]
+PLOTLY_ADD_TO_MODEBAR = ["v1hovermode", "toggleSpikelines"]
 PLOTLY_DISPLAY_LOGO = False
-CONFIG_PLOTLY = {'displaylogo': PLOTLY_DISPLAY_LOGO,
-                 'modeBarButtonsToRemove': PLOTLY_REMOVE_FROM_MODEBAR,
-                 'modeBarButtonsToAdd': PLOTLY_ADD_TO_MODEBAR,
-                 }
+CONFIG_PLOTLY = {
+    "displaylogo": PLOTLY_DISPLAY_LOGO,
+    "modeBarButtonsToRemove": PLOTLY_REMOVE_FROM_MODEBAR,
+    "modeBarButtonsToAdd": PLOTLY_ADD_TO_MODEBAR,
+}
 
 
 def load_css():
@@ -25,9 +26,8 @@ def load_css():
     # TODO maybe allow parameter with the path instead of hard coded
     # this way, custom CSS per page would be possible
 
-    with open('templates/static/css/style.css') as f:
-        st.markdown('<style>{}</style>'.format(f.read()),
-                    unsafe_allow_html=True)
+    with open("templates/static/css/style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def load_katex_mhchem():
@@ -35,7 +35,8 @@ def load_katex_mhchem():
     # see ISSUE #5013 opened by me on the streamlit repo
     # chemical formulas and equations made with LaTeX math while not fix
     components.html(
-        '<script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN"  crossorigin="anonymous"></script>')  # noqa E:501
+        '<script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN"  crossorigin="anonymous"></script>'  # noqa
+    )
 
 
 def find_me_buttons(site, url_or_user, width=120, margin=3):
@@ -58,24 +59,24 @@ def find_me_buttons(site, url_or_user, width=120, margin=3):
     Streamlit markdown object
     """
 
-    if site == 'linkedin':
-        button_code = f'''
+    if site == "linkedin":
+        button_code = f"""
         <a href="https://www.linkedin.com/in/{url_or_user}" target="_blank">
-        <img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
-    elif site == 'portfolio':
-        button_code = f'''
+        <img src="https://img.shields.io/badge/-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>"""  # noqa: E501
+    elif site == "portfolio":
+        button_code = f"""
         <a href="{url_or_user}" target="_blank">
-        <img src="https://img.shields.io/badge/portfolio-00A98F?style=for-the-badge&logo=About.me&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
-    elif site == 'github':
-        button_code = f'''
+        <img src="https://img.shields.io/badge/portfolio-00A98F?style=for-the-badge&logo=About.me&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>"""  # noqa: E501
+    elif site == "github":
+        button_code = f"""
         <a href="https://github.com/{url_or_user}" target="_blank">
-        <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
-    elif site == 'github_sponsors':
-        button_code = f'''
+        <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>"""  # noqa: E501
+    elif site == "github_sponsors":
+        button_code = f"""
         <a href="https://github.com/sponsors/{url_or_user}" target="_blank">
-        <img src="https://img.shields.io/badge/-Sponsor-EA4AAA?style=for-the-badge&logo=GitHubSponsors&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>'''  # noqa: E501
+        <img src="https://img.shields.io/badge/-Sponsor-EA4AAA?style=for-the-badge&logo=GitHubSponsors&logoColor=white" width="{width}" style="margin:{margin}px" target="_blank"></a>"""  # noqa: E501
     else:
-        raise ValueError('Invalid site')
+        raise ValueError("Invalid site")
     return st.markdown(button_code, unsafe_allow_html=True)
 
 
@@ -92,10 +93,10 @@ def github_avatar_link(user_id):
     str
         GitHub avatar link
     """
-    return f'https://avatars.githubusercontent.com/u/{user_id}?v=4'
+    return f"https://avatars.githubusercontent.com/u/{user_id}?v=4"
 
 
-def text_from_markdown(markdown_file, image_markdown='!['):
+def text_from_markdown(markdown_file, image_markdown="!["):
     """
     Extract only text from a markdown (avoiding figures with ![')
     This way, the figures can be placed with Streamlit functions which make
@@ -151,6 +152,6 @@ def vertical_spacer(lines, sidebar=False):
     """
     for _ in range(lines):
         if sidebar:
-            st.sidebar.write('\n')
+            st.sidebar.write("\n")
         else:
-            st.write('\n')
+            st.write("\n")
