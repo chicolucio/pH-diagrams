@@ -39,7 +39,9 @@ pH diagrams
 Installation
 ============
 
+::
 
+   pip install pH-diagrams
 
 Usage
 =====
