@@ -1,4 +1,4 @@
-chempy==0.8.1
+chempy==0.8.0
 matplotlib==3.5.2
 numpy==1.23.0
 plotly==5.3.1
