@@ -82,8 +82,8 @@ A live interactive version of this project can be seen clicking in the following
 
 The web app was made with Streamlit_ and hosted on Heroku_.
 
-A local version of the Streamlit_ app can be used running the command ``streamlit-ph``
-on a terminal after installing the package. A browser window will open (if not, follow
+A local version of the Streamlit_ app can be used cloning the repo and running
+``streamlit run Home.py`` on a terminal. A browser window will open (if not, follow
 the instructions shown on the terminal output).
 
 A brief explanation on the chemical theory behind each diagram can be seen
