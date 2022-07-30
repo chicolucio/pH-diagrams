@@ -1,5 +1,5 @@
 ===========
-pH_diagrams
+pH diagrams
 ===========
 
 This is the documentation of **pH diagrams**.

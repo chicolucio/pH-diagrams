@@ -1,12 +1,9 @@
 .. These are examples of badges you might want to add to your README:
    please update the URLs accordingly
 
-    .. image:: https://readthedocs.org/projects/pH_diagrams/badge/?version=latest
-        :alt: ReadTheDocs
-        :target: https://pH_diagrams.readthedocs.io/en/stable/
     .. image:: https://img.shields.io/pypi/v/pH_diagrams.svg
         :alt: PyPI-Server
-        :target: https://pypi.org/project/pH_diagrams/
+        :target: https://pypi.org/project/pH-diagrams/
 
 
 .. image:: https://img.shields.io/badge/Author-Francisco%20Bustamante-red.svg
@@ -24,7 +21,9 @@
 .. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
     :alt: Project generated with PyScaffold
     :target: https://pyscaffold.org/
-
+.. image:: https://readthedocs.org/projects/ph-diagrams/badge/?version=latest
+   :target: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 
 ===========
@@ -33,7 +32,7 @@ pH diagrams
 
     A Python package to plot fractional composition diagrams and pH-log c diagrams
 
-.. image:: images/animation.gif
+.. image:: https://github.com/chicolucio/pH-diagrams/blob/master/images/animation.gif?raw=true
     :alt: header animation
     :align: center
 
@@ -44,6 +43,8 @@ Installation
 
 Usage
 =====
+
+Full documentation is hosted on `Read the Docs`_
 
 For basic usage see the tutorial notebook on ``notebooks`` folder.
 
@@ -95,3 +96,4 @@ Available at: https://github.com/chicolucio/pH-diagrams
 .. _Streamlit: https://streamlit.io
 .. _Heroku: https://www.heroku.com
 .. _contributing guide: CONTRIBUTING.rst
+.. _Read the Docs: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
