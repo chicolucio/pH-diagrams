@@ -1,0 +1,13 @@
+# Requirements file for ReadTheDocs, check .readthedocs.yml.
+# To build the module reference correctly, make sure every external package
+# under `install_requires` in `setup.cfg` is also listed here!
+
+# sphinx_rtd_theme
+
+chempy>0.8.0
+importlib-metadata
+matplotlib>=3.5.0
+numpy>1.20.0
+plotly>5.3.0
+sphinx>=3.2.1
+streamlit>1.11.0
