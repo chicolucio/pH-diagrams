@@ -1,11 +1,3 @@
-.. These are examples of badges you might want to add to your README:
-   please update the URLs accordingly
-
-    .. image:: https://img.shields.io/pypi/v/pH_diagrams.svg
-        :alt: PyPI-Server
-        :target: https://pypi.org/project/pH-diagrams/
-
-
 .. image:: https://img.shields.io/badge/Author-Francisco%20Bustamante-red.svg
     :alt: Francisco Bustamante
     :target: https://www.linkedin.com/in/flsbustamante
@@ -22,9 +14,11 @@
     :alt: Project generated with PyScaffold
     :target: https://pyscaffold.org/
 .. image:: https://readthedocs.org/projects/ph-diagrams/badge/?version=latest
-   :target: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
-
+    :target: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+.. image:: https://img.shields.io/pypi/v/pH-diagrams.svg
+    :alt: PyPI-Server
+    :target: https://pypi.org/project/pH-diagrams/
 
 ===========
 pH diagrams
@@ -46,9 +40,38 @@ Installation
 Usage
 =====
 
-Full documentation is hosted on `Read the Docs`_
+The class ``Acid`` must be imported from ``ph_diagrams``. To create diagrams for the
+acetic acid::
 
-For basic usage see the tutorial notebook on ``notebooks`` folder.
+   >>> from ph_diagrams import Acid
+   >>> import matplotlib.pyplot as plt
+   >>> fig, axs = plt.subplots(nrows=1, ncols=2)
+   >>> acetic_acid = Acid(pKa=(4.76,), acid_concentration=0.1)
+   >>> acetic_acid.plot(plot_type='distribution', backend='matplotlib',
+                        title='Acetic acid - Distribution diagram',
+                        ax=axs[0], legend=False)
+   >>> acetic_acid.plot(plot_type='pC', backend='matplotlib',
+                        title='Acetic acid - pH-log c diagram', ax=axs[1])
+   >>> plt.show()
+
+As can be seen, the parameter ``pKa`` must be a tuple even if there is only one value.
+The above example generates the following plot, with both diagrams side by side:
+
+.. image:: https://github.com/chicolucio/pH-diagrams/blob/master/images/acetic_acid.png?raw=true
+    :alt: acetic acid example
+    :align: center
+
+The plots above were made with Matplotlib_, the default backend.
+
+Changing the ``backend`` parameter to ``plotly``, and removing the ``ax`` parameter
+(it works only with Matplotlib), will open a browser window for each plot.
+Since Plotly_ is interactive, the user can zoom, pan, and see values on hover.
+
+For more basic usage examples, see the ``tutorial.ipynb`` notebook on ``notebooks`` folder.
+In the same folder, the ``tutorial_interactive_ipywidgets.ipynb`` file shows how to
+use ipywidgets_ to create interactive diagrams.
+
+Full documentation is hosted on `Read the Docs`_.
 
 A live interactive version of this project can be seen clicking in the following badge:
 
@@ -58,6 +81,13 @@ A live interactive version of this project can be seen clicking in the following
     :target: https://phdiagrams.herokuapp.com/
 
 The web app was made with Streamlit_ and hosted on Heroku_.
+
+A local version of the Streamlit_ app can be used running the command ``streamlit-ph``
+on a terminal after installing the package. A browser window will open (if not, follow
+the instructions shown on the terminal output).
+
+A brief explanation on the chemical theory behind each diagram can be seen
+`here <https://phdiagrams.herokuapp.com/How_to_use_and_theory>`_.
 
 
 Contributing
@@ -92,10 +122,13 @@ Citing
 
 If you use this project in a scientific publication or in classes, please consider citing as
 
-F. L. S. Bustamante & H. B. Soares & N. O. Souza, pH diagrams, 2021.
-Available at: https://github.com/chicolucio/pH-diagrams
+   F. L. S. Bustamante & H. B. Soares & N. O. Souza, pH diagrams, 2021.
+   Available at: https://github.com/chicolucio/pH-diagrams
 
+.. _Matplotlib: https://matplotlib.org
 .. _Streamlit: https://streamlit.io
 .. _Heroku: https://www.heroku.com
+.. _Plotly: https://plotly.com/python/
 .. _contributing guide: CONTRIBUTING.rst
 .. _Read the Docs: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
+.. _ipywidgets: https://ipywidgets.readthedocs.io/en/stable/

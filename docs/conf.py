@@ -283,6 +283,7 @@ intersphinx_mapping = {
     "pyscaffold": ("https://pyscaffold.org/en/stable", None),
     "chempy": ("https://github.com/bjodah/chempy", None),
     "streamlit": ("https://docs.streamlit.io/", None),
+    "plotly": ("https://plotly.com/python/", None),
 }
 
 print(f"loading configurations for {project} {version} ...", file=sys.stderr)
