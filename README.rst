@@ -30,6 +30,15 @@ pH diagrams
     :alt: header animation
     :align: center
 
+|
+
+Interactive web app:
+
+.. image:: https://img.shields.io/badge/-Streamlit%20app-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white
+    :alt: Streamlit app
+    :align: center
+    :target: https://phdiagrams.herokuapp.com/
+
 Installation
 ============
 
@@ -67,10 +76,6 @@ Changing the ``backend`` parameter to ``plotly``, and removing the ``ax`` parame
 (it works only with Matplotlib), will open a browser window for each plot.
 Since Plotly_ is interactive, the user can zoom, pan, and see values on hover.
 
-For more basic usage examples, see the ``tutorial.ipynb`` notebook on ``notebooks`` folder.
-In the same folder, the ``tutorial_interactive_ipywidgets.ipynb`` file shows how to
-use ipywidgets_ to create interactive diagrams.
-
 Full documentation is hosted on `Read the Docs`_.
 
 A live interactive version of this project can be seen clicking in the following badge:
@@ -82,13 +87,33 @@ A live interactive version of this project can be seen clicking in the following
 
 The web app was made with Streamlit_ and hosted on Heroku_.
 
-A local version of the Streamlit_ app can be used cloning the repo and running
-``streamlit run Home.py`` on a terminal. A browser window will open (if not, follow
-the instructions shown on the terminal output).
-
 A brief explanation on the chemical theory behind each diagram can be seen
 `here <https://phdiagrams.herokuapp.com/How_to_use_and_theory>`_.
 
+Local Streamlit app and Jupyter notebooks
+-----------------------------------------
+
+This repo has Jupyter Notebooks and scripts for a fully functional
+Streamlit_ app. First, create a virtual environment, clone the repo and
+install dependencies::
+
+    python -m venv .venv
+    source .venv/bin/activate
+    git clone git@github.com:chicolucio/pH-diagrams.git
+    cd pH-diagrams
+    pip install -r requirements.txt
+
+This considers that you have `Jupyter Notebook`_ installed. If not, install it with
+``pip install notebook``.
+
+For more basic usage examples, see the ``tutorial.ipynb`` notebook on ``notebooks`` folder.
+In the same folder, the ``tutorial_interactive_ipywidgets.ipynb`` file shows how to
+use ipywidgets_ to create interactive diagrams. Just run ``jupyter notebook`` on a
+terminal from the repo root folder and select the files.
+
+A local version of the Streamlit_ app can be used running, from the repo root folder,
+``streamlit run Home.py`` on a terminal. A browser window will open (if not, follow
+the instructions shown on the terminal output).
 
 Contributing
 ============
@@ -132,3 +157,4 @@ If you use this project in a scientific publication or in classes, please consid
 .. _contributing guide: CONTRIBUTING.rst
 .. _Read the Docs: https://ph-diagrams.readthedocs.io/en/latest/?badge=latest
 .. _ipywidgets: https://ipywidgets.readthedocs.io/en/stable/
+.. _Jupyter Notebook: https://jupyter.org/

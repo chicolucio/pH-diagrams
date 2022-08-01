@@ -97,7 +97,6 @@ This can easily be done via |venv|_::
 
     python -m venv .venv
     source .venv/bin/activate
-    pip install -r requirements-dev.txt
 
 Clone the repository
 --------------------
@@ -105,10 +104,11 @@ Clone the repository
 #. Create an user account on |the repository service| if you do not already have one.
 #. Fork the project repository_: click on the *Fork* button near the top of the
    page. This creates a copy of the code under your account on |the repository service|.
-#. Clone this copy to your local disk::
+#. Clone this copy to your local disk and install dev requirements::
 
     git clone git@github.com:YourLogin/pH-diagrams.git
     cd pH-diagrams
+    pip install -r requirements-dev.txt
 
 #. Check if all tests are passing::
 
