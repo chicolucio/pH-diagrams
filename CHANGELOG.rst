@@ -2,6 +2,14 @@
 Changelog
 =========
 
+Version 0.3.3 (2022-07-30)
+==========================
+
+- Remove script to run Streamlit locally (better to just clone the repo)
+- Remove Colab links in notebooks
+- Fix notebooks import statement
+- Detailed instructions to local notebooks and Streamlit
+
 Version 0.3.2 (2022-07-30)
 ==========================
 
